@@ -2,7 +2,7 @@ package co.edu.unbosque.catastromunicipal.persistence.entity;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
+import java.util.List;
 
 
 @Entity
@@ -22,7 +22,7 @@ public class Persona {
     @JoinColumn(name = "dni_c")
     private Persona householdHeadId;
     @OneToMany(mappedBy = "householdHeadId")
-    private HashSet<Persona> householdMembers = new HashSet<>();
+    private List<Persona> householdMembers;
     @ManyToOne
     @JoinColumn(name = "calle", referencedColumnName = "calle", insertable = false, updatable = false)
     private Vivienda street;
@@ -62,19 +62,19 @@ public class Persona {
         this.additInfo = additInfo;
     }
 
-    public Persona getHouseholdHeadid() {
+    public Persona getHouseholdHeadId() {
         return householdHeadId;
     }
 
-    public void setHouseholdHeadid(Persona householdHeadid) {
-        this.householdHeadId = householdHeadid;
+    public void setHouseholdHeadId(Persona householdHeadId) {
+        this.householdHeadId = householdHeadId;
     }
 
-    public HashSet<Persona> getHouseholdMembers() {
+    public List<Persona> getHouseholdMembers() {
         return householdMembers;
     }
 
-    public void setHouseholdMembers(HashSet<Persona> householdMembers) {
+    public void setHouseholdMembers(List<Persona> householdMembers) {
         this.householdMembers = householdMembers;
     }
 
