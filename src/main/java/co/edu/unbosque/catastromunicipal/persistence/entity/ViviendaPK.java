@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class ViviendaPK implements Serializable {
 
-    private int numero;
+    private Integer numero;
     private String calle;
 
     public ViviendaPK() {}
@@ -21,5 +21,21 @@ public class ViviendaPK implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(numero, calle);
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
     }
 }

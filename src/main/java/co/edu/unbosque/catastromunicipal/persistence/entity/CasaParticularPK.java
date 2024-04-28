@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class CasaParticularPK implements Serializable {
-    public int numero;
+    public Integer numero;
     public String calle;
 
     @Override
@@ -19,5 +19,21 @@ public class CasaParticularPK implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(numero, calle);
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
     }
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class BloqueCasasPK implements Serializable {
-    private int numero;
+    private Integer numero;
     private String casa;
 
     public BloqueCasasPK() {
@@ -22,5 +22,21 @@ public class BloqueCasasPK implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(numero, casa);
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public String getCasa() {
+        return casa;
+    }
+
+    public void setCasa(String casa) {
+        this.casa = casa;
     }
 }

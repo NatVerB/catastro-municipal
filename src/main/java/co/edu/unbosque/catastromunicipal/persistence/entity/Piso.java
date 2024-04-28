@@ -10,19 +10,24 @@ public class Piso {
     @ManyToOne
     @JoinColumn(name = "calle", referencedColumnName = "calle", updatable = false, insertable = false)
     private BloqueCasas calle;
+
     @Id
     @ManyToOne
     @JoinColumn(name = "numero", referencedColumnName = "numero", updatable = false, insertable = false)
     private  BloqueCasas numero;
+
     @Id
     @Column(name = "escalera")
     private String escalera;
+
     @Id
     @Column(name = "planta")
-    private int plantaPiso;
+    private Integer plantaPiso;
+
     @Id
     @Column(name = "puerta")
     private String puerta;
+
     @ManyToOne
     @JoinColumn(name = "dni_p", referencedColumnName = "dni")
     private Persona persona;
