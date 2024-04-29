@@ -10,4 +10,5 @@ public interface HabitaPisoCrudRepository extends CrudRepository<HabitaPiso, Int
     public Optional<HabitaPiso> findById(Integer id);
     public Iterable<HabitaPiso> findAll();
     public void deleteById(Integer id);
+
 }
