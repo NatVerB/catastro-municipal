@@ -5,7 +5,13 @@ import co.edu.unbosque.catastromunicipal.persistence.entity.BloqueCasas;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface BloqueCasasCrudRepository extends CrudRepository<BloqueCasas, BloqueCasasPK> {
+import java.util.List;
 
+public interface BloqueCasasCrudRepository extends CrudRepository<BloqueCasas, BloqueCasasPK> {
+    public List<BloqueCasas> findByCalleVivienda(String calleVivienda);
+    public List<BloqueCasas> findByNumVivienda(Integer numVivienda);
+    public void getByCalleVivienda(String calleVivienda);
+    public void getByNumVivienda(Integer numVivienda);
+    public void deleteByCalleVivienda(String calleVivienda);
+    public void deleteByNumVivienda(Integer numVivienda);
 }
