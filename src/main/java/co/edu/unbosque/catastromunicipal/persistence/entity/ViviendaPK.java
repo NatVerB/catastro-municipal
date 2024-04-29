@@ -1,23 +1,26 @@
 package co.edu.unbosque.catastromunicipal.persistence.entity;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Id;
-
 import java.io.Serializable;
+import java.util.Objects;
 
-@Embeddable
 public class ViviendaPK implements Serializable {
 
-    private String calle; //PK
+    private Integer numero;
+    private String calle;
 
-    private Integer numero; //PK
+    public ViviendaPK() {}
 
-    public String getCalle() {
-        return calle;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ViviendaPK that = (ViviendaPK) o;
+        return numero == that.numero && Objects.equals(calle, that.calle);
     }
 
-    public void setCalle(String calle) {
-        this.calle = calle;
+    @Override
+    public int hashCode() {
+        return Objects.hash(numero, calle);
     }
 
     public Integer getNumero() {
@@ -26,5 +29,13 @@ public class ViviendaPK implements Serializable {
 
     public void setNumero(Integer numero) {
         this.numero = numero;
+    }
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
     }
 }

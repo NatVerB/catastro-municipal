@@ -2,71 +2,53 @@ package co.edu.unbosque.catastromunicipal.persistence.entity;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
-@Table(name = "Vivienda")
+@IdClass(ViviendaPK.class)
 public class Vivienda {
+    @Id
+    private Integer numero;
 
-    @EmbeddedId
-    private ViviendaPK id;
+    @Id
+    private String calle;
 
-    @Column(name = "tipo_vivienda")
-    private String tipoVivienda;
+    @Column(name = "tipo_vivienda", length = 1)
+    private String tipo;
 
-    @Column(name = "codigo_postal")
+    @Column(name = "codigo_postal", length = 5)
     private Integer codigoPostal;
 
-    private Integer metros;
-
-    @ManyToOne
-    @JoinColumn(name = "nombre_zona", insertable = false, updatable = false)
-    private ZonaUrbana zonaUrbana;
-
-    @OneToMany(mappedBy = "vivienda", insertable = false, updatable = false)
-    private List<CasaParticular> CasasParticular;
-
-    @OneToMany(mappedBy = "zonaUrbana")
-    private List<BloqueCasas> bloquesCasas;
-
+    @Column(name = "metros", length = 5)
+    private Integer metrosCuadrados;
 
     @Column(name = "od_vivienda")
-    private Long odVivienda;
+    private String OdVivienda;
 
-    @Column(name = "nombre_zona")
-    private String nombreZona;
+    @ManyToOne
+    @JoinColumn(name = "nombre_zona", referencedColumnName = "nombre_zona")
+    private ZonaUrbana zona;
 
-
-    public ViviendaPK getId() {
-        return id;
+    public Integer getNumero() {
+        return numero;
     }
 
-    public void setId(ViviendaPK id) {
-        this.id = id;
+    public void setNumero(Integer numero) {
+        this.numero = numero;
     }
 
-    public String getNombreZona() {
-        return nombreZona;
+    public String getCalle() {
+        return calle;
     }
 
-    public void setNombreZona(String nombreZona) {
-        this.nombreZona = nombreZona;
+    public void setCalle(String calle) {
+        this.calle = calle;
     }
 
-    public Long getOdVivienda() {
-        return odVivienda;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setOdVivienda(Long odVivienda) {
-        this.odVivienda = odVivienda;
-    }
-
-    public Integer getMetros() {
-        return metros;
-    }
-
-    public void setMetros(Integer metros) {
-        this.metros = metros;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public Integer getCodigoPostal() {
@@ -77,12 +59,27 @@ public class Vivienda {
         this.codigoPostal = codigoPostal;
     }
 
-    public String getTipoVivienda() {
-        return tipoVivienda;
+    public Integer getMetrosCuadrados() {
+        return metrosCuadrados;
     }
 
-    public void setTipoVivienda(String tipoVivienda) {
-        this.tipoVivienda = tipoVivienda;
+    public void setMetrosCuadrados(Integer metrosCuadrados) {
+        this.metrosCuadrados = metrosCuadrados;
     }
 
+    public String getOdVivienda() {
+        return OdVivienda;
+    }
+
+    public void setOdVivienda(String odVivienda) {
+        OdVivienda = odVivienda;
+    }
+
+    public ZonaUrbana getZona() {
+        return zona;
+    }
+
+    public void setZona(ZonaUrbana zona) {
+        this.zona = zona;
+    }
 }

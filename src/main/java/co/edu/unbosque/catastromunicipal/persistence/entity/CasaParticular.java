@@ -4,56 +4,21 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "CasaParticular")
+@IdClass(CasaParticular.class)
 public class CasaParticular {
-
-    @EmbeddedId
-    private CasaParticularPK id;
-
+    @Id
+    @OneToOne
+    @JoinColumn(name = "calle", referencedColumnName = "calle", insertable = false, updatable = false)
+    private Vivienda calle;
+    @Id
+    @OneToOne
+    @JoinColumn(name = "numero", referencedColumnName = "numero", insertable = false, updatable = false)
+    private Vivienda numero;
     @Column(name = "metros_c")
-    private Integer metrosC;
-
+    private String metrosC;
     @Column(name = "od_casa")
-    private Long odCasa;
-
-    @Column(name = "dni_cp")
-    private Integer dniCp;
-
-    @OneToMany
-    @JoinColumns({
-            @JoinColumn(name = "calle", insertable = false, updatable = false),
-            @JoinColumn(name = "numero", insertable = false, updatable = false)
-    })
-    private Vivienda vivienda;
-
-    public CasaParticularPK getId() {
-        return id;
-    }
-
-    public void setId(CasaParticularPK id) {
-        this.id = id;
-    }
-
-    public Integer getMetrosC() {
-        return metrosC;
-    }
-
-    public void setMetrosC(Integer metrosC) {
-        this.metrosC = metrosC;
-    }
-
-    public Long getOdCasa() {
-        return odCasa;
-    }
-
-    public void setOdCasa(Long odCasa) {
-        this.odCasa = odCasa;
-    }
-
-    public Integer getDniCp() {
-        return dniCp;
-    }
-
-    public void setDniCp(Integer dniCp) {
-        this.dniCp = dniCp;
-    }
+    private String additInfoCasa;
+    @ManyToOne
+    @JoinColumn(name = "dni_cp", referencedColumnName = "dni")
+    private Persona dni;
 }

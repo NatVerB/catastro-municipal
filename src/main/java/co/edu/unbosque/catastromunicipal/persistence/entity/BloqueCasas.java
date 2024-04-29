@@ -4,46 +4,18 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "BloqueCasas")
+@IdClass(BloqueCasasPK.class)
 public class BloqueCasas {
-
-    @EmbeddedId
-    private BloqueCasasPK id;
-
-    @Column(name = "metros_b")
-    private Integer metrosB;
-
-    @Column(name = "od_bloque")
-    private Long odBloque;
-
+    @Id
     @OneToOne
-    @JoinColumn(name = "calle", insertable = false, updatable = false)
-    private Vivienda calle;
-
-    @ManyToOne
-    @JoinColumn(name = "numero", insertable = false, updatable = false)
-    private Vivienda numero;
-
-    public BloqueCasasPK getId() {
-        return id;
-    }
-
-    public void setId(BloqueCasasPK id) {
-        this.id = id;
-    }
-
-    public Integer getMetrosB() {
-        return metrosB;
-    }
-
-    public void setMetrosB(Integer metrosB) {
-        this.metrosB = metrosB;
-    }
-
-    public Long getOdBloque() {
-        return odBloque;
-    }
-
-    public void setOdBloque(Long odBloque) {
-        this.odBloque = odBloque;
-    }
+    @JoinColumn(name = "numero", referencedColumnName = "numero", insertable = false, updatable = false)
+    private Vivienda numVivienda;
+    @Id
+    @OneToOne
+    @JoinColumn(name = "calle", referencedColumnName = "calle", insertable = false, updatable = false)
+    private Vivienda calleVivienda;
+    @Column(name = "metros_b")
+    private int metrosBloque;
+    @Column(name = "od_bloque")
+    private String additInfoBloque;
 }

@@ -33,4 +33,12 @@ public class ZonaUrbana {
     public void setOdZona(Long odZona) {
         this.odZona = odZona;
     }
+
+    public List<Vivienda> getViviendas() {
+        return viviendas;
+    }
+
+    public void setViviendas(List<Vivienda> viviendas) {
+        this.viviendas = viviendas;
+    }
 }
