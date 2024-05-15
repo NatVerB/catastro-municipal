@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface FlatResidentMapper {
     @Mappings({
@@ -14,6 +16,8 @@ public interface FlatResidentMapper {
             @Mapping(source = "piso", target = "floor")
     })
     FlatResident toFlatResident(HabitaPiso habitaPiso);
+    List<FlatResident> toFlatResidents(List<HabitaPiso> habitaPiso);
+
 
     @InheritInverseConfiguration
     HabitaPiso toHabitaPiso(FlatResident flatResident);

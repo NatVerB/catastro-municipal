@@ -1,49 +1,61 @@
 package co.edu.unbosque.catastromunicipal.persistence;
 
+import co.edu.unbosque.catastromunicipal.domain.BlockHouses;
+import co.edu.unbosque.catastromunicipal.domain.repository.BlockHousesRepository;
 import co.edu.unbosque.catastromunicipal.persistence.crud.BloqueCasasCrudRepository;
 import co.edu.unbosque.catastromunicipal.persistence.entity.BloqueCasas;
+import co.edu.unbosque.catastromunicipal.persistence.mapper.BlockHousesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class BloqueCasasRepository {
-    @Autowired
+public class BloqueCasasRepository implements BlockHousesRepository {
+    private BlockHousesMapper mapper;
     private BloqueCasasCrudRepository bloqueCasasCrudRepository;
 
-    public List<BloqueCasas> getBloqueCasas() {
-        return (List<BloqueCasas>) bloqueCasasCrudRepository.findAll();
+    @Override
+    public List<BlockHouses> getAllBlockHouses() {
+        List<BloqueCasas> bloqueCasas =  (List<BloqueCasas>) bloqueCasasCrudRepository.findAll();
+        return mapper.toBlockHouses(bloqueCasas);
     }
 
-    public List<BloqueCasas> getBloqueCasasByCalle(String calle){
-        return bloqueCasasCrudRepository.findById_Calle(calle);
+    @Override
+    public List<BlockHouses> getBlockHousesByStreet(String calle){
+        List<BloqueCasas> bloqueCasas =  (List<BloqueCasas>) bloqueCasasCrudRepository.findById_Calle(calle);
+        return mapper.toBlockHouses(bloqueCasas);
     }
 
-    public List<BloqueCasas> getBloqueCasasByNumero(Integer numero){
-        return bloqueCasasCrudRepository.findById_Numero(numero);
+    @Override
+    public List<BlockHouses> getBlockHousesByNumber(Integer numero){
+        List<BloqueCasas> bloqueCasas =  (List<BloqueCasas>) bloqueCasasCrudRepository.findById_Numero(numero);
+        return mapper.toBlockHouses(bloqueCasas);
     }
 
-    public void deleteByCalle(String calle){
-        bloqueCasasCrudRepository.deleteById_Calle(calle);
+    @Override
+    public void deleteBlockHousesByNumber(Integer number){
+        bloqueCasasCrudRepository.deleteById_Numero(number);
     }
 
-    public void deleteByNumero(Integer numero){
-        bloqueCasasCrudRepository.deleteById_Numero(numero);
+    @Override
+    public void deleteBlockHousesByStreet(String street){
+        bloqueCasasCrudRepository.deleteById_Calle(street);
     }
 
-    public BloqueCasas save (BloqueCasas bloque){
-        return bloqueCasasCrudRepository.save(bloque);
+    @Override
+    public BlockHouses saveBlockHouses (BlockHouses bloque){
+        BloqueCasas bloqueCasas = mapper.toBloqueCasas(bloque);
+        return mapper.toBlockHouses(bloqueCasasCrudRepository.save(bloqueCasas));
     }
 
-    public BloqueCasas update(BloqueCasas bloque){
-        if (bloque.getId() != null && bloqueCasasCrudRepository.existsById(bloque.getId())) {
-            return bloqueCasasCrudRepository.save(bloque);
+    @Override
+    public BlockHouses updateBlockHouses(BlockHouses blockHouses){
+        BloqueCasas bloqueCasas = mapper.toBloqueCasas(blockHouses);
+        if (bloqueCasas.getId() != null && bloqueCasasCrudRepository.existsById(bloqueCasas.getId())) {
+            return mapper.toBlockHouses(bloqueCasasCrudRepository.save(bloqueCasas));
         } else {
             throw new RuntimeException("No se puede actualizar el BloqueCasas porque no existe en la base de datos.");
         }
     }
-
-
-
 }

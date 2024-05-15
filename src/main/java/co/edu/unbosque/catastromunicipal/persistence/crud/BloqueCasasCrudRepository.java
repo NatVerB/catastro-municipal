@@ -11,4 +11,5 @@ public interface BloqueCasasCrudRepository extends CrudRepository<BloqueCasas, B
     List<BloqueCasas> findById_Calle(String calle);
     void deleteById_Calle(String calle);
     void deleteById_Numero(Integer calle);
+
 }

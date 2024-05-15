@@ -63,4 +63,12 @@ public class BloqueCasas {
     public void setVivienda(Vivienda vivienda) {
         this.vivienda = vivienda;
     }
+
+    public List<Piso> getPisos() {
+        return pisos;
+    }
+
+    public void setPisos(List<Piso> pisos) {
+        this.pisos = pisos;
+    }
 }

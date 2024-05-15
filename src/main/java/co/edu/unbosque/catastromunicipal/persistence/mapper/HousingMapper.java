@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface HousingMapper {
     @Mappings({
@@ -16,9 +18,13 @@ public interface HousingMapper {
             @Mapping(source = "codigoPostal", target = "postalCode"),
             @Mapping(source = "metrosCuadrados", target = "meters"),
             @Mapping(source = "odVivienda", target = "housingOd"),
-            @Mapping(source = "zonaUrbana", target = "urbanZone")
+            @Mapping(source = "zonaUrbana", target = "urbanZone"),
+            @Mapping(source = "bloqueCasas", target = "blockHouses"),
+            @Mapping(source = "casaParticular", target = "privateHouse"),
+            @Mapping(source = "personas", target = "people")
     })
     Housing toHousing(Vivienda vivienda);
+    List<Housing> toHousingList(List<Vivienda> viviendas);
 
     @InheritInverseConfiguration
     Vivienda toVivienda(Housing housing);

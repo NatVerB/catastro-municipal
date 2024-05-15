@@ -30,6 +30,8 @@ public class Piso {
     @OneToOne(mappedBy = "piso", cascade =  CascadeType.ALL, orphanRemoval = true)
     private HabitaPiso habitaPiso;
 
+
+
     public PisoPK getId() {
         return id;
     }

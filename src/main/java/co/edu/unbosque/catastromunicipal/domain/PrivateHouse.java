@@ -6,9 +6,18 @@ public class PrivateHouse {
     private Integer meters;
     private String houseOd;
     private Housing housing;
+    private Person person;
 
     // falta el de private Person person;
 
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 
     public Integer getNumber() {
         return number;

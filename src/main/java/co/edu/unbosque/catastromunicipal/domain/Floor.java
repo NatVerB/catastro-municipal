@@ -11,9 +11,18 @@ public class Floor {
     private String floorOd;
     private BlockHouses blockHouses;
     private FlatResident flatResident;
+    private Person person;
 
     //falta el de la persona private Person person;
 
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 
     public Integer getNumber() {
         return number;

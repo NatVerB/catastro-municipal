@@ -1,5 +1,7 @@
 package co.edu.unbosque.catastromunicipal.domain;
 
+import java.util.List;
+
 public class Housing {
 
     private Integer number;
@@ -9,6 +11,33 @@ public class Housing {
     private Integer meters;
     private String housingOd;
     private UrbanZone urbanZone;
+    private BlockHouses blockHouses;
+    private PrivateHouse privateHouse;
+    private List<Person> people;
+
+    public List<Person> getPeople() {
+        return people;
+    }
+
+    public void setPeople(List<Person> people) {
+        this.people = people;
+    }
+
+    public BlockHouses getBlockHouses() {
+        return blockHouses;
+    }
+
+    public void setBlockHouses(BlockHouses blockHouses) {
+        this.blockHouses = blockHouses;
+    }
+
+    public PrivateHouse getPrivateHouse() {
+        return privateHouse;
+    }
+
+    public void setPrivateHouse(PrivateHouse privateHouse) {
+        this.privateHouse = privateHouse;
+    }
 
     public Integer getNumber() {
         return number;

@@ -7,8 +7,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
-public interface FloorRepositoryMapper {
+public interface FloorMapper {
     @Mappings({
             @Mapping(source = "id.numero", target = "number"),
             @Mapping(source = "id.calle", target = "street"),
@@ -18,9 +20,11 @@ public interface FloorRepositoryMapper {
             @Mapping(source = "metrosP", target = "meters"),
             @Mapping(source = "odPiso", target = "floorOd"),
             @Mapping(source = "bloqueCasas", target = "blockHouses"),
-            @Mapping(source = "habitaPiso", target = "flatResident")
+            @Mapping(source = "habitaPiso", target = "flatResident"),
+            @Mapping(source = "persona", target = "person")
     })
     Floor toFloor(Piso piso);
+    List<Floor> toFloors(List<Piso> pisos);
 
     @InheritInverseConfiguration
     Piso toPiso(Floor floor);

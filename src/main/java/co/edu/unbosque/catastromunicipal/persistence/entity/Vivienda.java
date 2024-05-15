@@ -42,6 +42,7 @@ public class Vivienda {
 
 // Getters y setters
 
+
     public ViviendaPK getId() {
         return id;
     }

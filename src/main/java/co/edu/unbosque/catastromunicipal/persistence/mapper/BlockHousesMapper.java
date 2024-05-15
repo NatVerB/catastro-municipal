@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface BlockHousesMapper {
     @Mappings({
@@ -14,13 +16,12 @@ public interface BlockHousesMapper {
             @Mapping(source = "id.calle", target = "street"),
             @Mapping(source = "metrosBloque", target = "blockMeters"),
             @Mapping(source = "odBloque", target = "blockOd"),
-            @Mapping(source = "vivienda", target = "housing")
+            @Mapping(source = "vivienda", target = "housing"),
+            @Mapping(source = "pisos", target = "floors")
     })
     BlockHouses toBlockHouses(BloqueCasas bloqueCasas);
+    List<BlockHouses> toBlockHouses(List<BloqueCasas> bloqueCasas);
 
     @InheritInverseConfiguration
-    //Aca falta esto @Mapping(target = "pisos", ignore = true)
     BloqueCasas toBloqueCasas(BlockHouses blockHouses);
-
-
 }

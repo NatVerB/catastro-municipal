@@ -7,14 +7,18 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface UrbanZoneMapper {
 
     @Mappings({
             @Mapping(source = "nombreZona", target = "zoneName"),
-            @Mapping(source = "odZona", target = "zoneOd")
+            @Mapping(source = "odZona", target = "zoneOd"),
+            @Mapping(source = "vivienda", target = "housings")
     })
     UrbanZone toUrbanZone(ZonaUrbana zonaUrbana);
+    List<UrbanZone> toUrbanZones(List<ZonaUrbana> zonaUrbanas);
 
     @InheritInverseConfiguration
     ZonaUrbana toZonaUrbana(UrbanZone urbanZone);
