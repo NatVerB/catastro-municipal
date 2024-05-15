@@ -7,16 +7,15 @@ import java.util.List;
 @Entity
 @Table(name = "ZonaUrbana")
 public class ZonaUrbana {
-
     @Id
     @Column(name = "nombre_zona")
     private String nombreZona;
 
     @Column(name = "od_zona")
-    private Long odZona;
+    private String odZona;
 
     @OneToMany(mappedBy = "zonaUrbana")
-    private List<Vivienda> viviendas;
+    private List<Vivienda> vivienda;
 
     public String getNombreZona() {
         return nombreZona;
@@ -26,19 +25,19 @@ public class ZonaUrbana {
         this.nombreZona = nombreZona;
     }
 
-    public Long getOdZona() {
+    public String getOdZona() {
         return odZona;
     }
 
-    public void setOdZona(Long odZona) {
+    public void setOdZona(String odZona) {
         this.odZona = odZona;
     }
 
-    public List<Vivienda> getViviendas() {
-        return viviendas;
+    public List<Vivienda> getVivienda() {
+        return vivienda;
     }
 
-    public void setViviendas(List<Vivienda> viviendas) {
-        this.viviendas = viviendas;
+    public void setVivienda(List<Vivienda> viviendas) {
+        this.vivienda = viviendas;
     }
 }

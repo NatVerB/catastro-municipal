@@ -6,27 +6,46 @@ import jakarta.persistence.*;
 @Table(name = "HabitaPiso")
 public class HabitaPiso {
     @Id
+    private Integer dni;
+
+    @MapsId
     @ManyToOne
     @JoinColumn(name = "dni", referencedColumnName = "dni", updatable = false, insertable = false)
     private Persona persona;
 
     @OneToOne
-    @JoinColumn(name = "calle", referencedColumnName = "calle")
-    private Piso calle;
+    @JoinColumns({
+            @JoinColumn(name = "calle", referencedColumnName = "calle"),
+            @JoinColumn(name = "numero", referencedColumnName = "numero"),
+            @JoinColumn(name = "escalera", referencedColumnName = "escalera"),
+            @JoinColumn(name = "planta", referencedColumnName = "planta"),
+            @JoinColumn(name = "puerta", referencedColumnName = "puerta")
+    })
+    private Piso piso;
 
-    @OneToOne
-    @JoinColumn(name = "numero", referencedColumnName = "numero")
-    private Piso numero;
+    public Persona getPersona() {
+        return persona;
+    }
 
-    @OneToOne
-    @JoinColumn(name = "escalera", referencedColumnName = "escalera")
-    private Piso escalera;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
 
-    @OneToOne
-    @JoinColumn(name = "planta", referencedColumnName = "planta")
-    private Piso planta;
+    public Piso getPiso() {
+        return piso;
+    }
 
-    @OneToOne
-    @JoinColumn(name = "puerta", referencedColumnName = "puerta")
-    private Piso puerta;
+    public void setPiso(Piso piso) {
+        this.piso = piso;
+    }
+
+    public Integer getDni() {
+        return dni;
+    }
+
+    public void setDni(Integer dni) {
+        this.dni = dni;
+    }
+
+
 }

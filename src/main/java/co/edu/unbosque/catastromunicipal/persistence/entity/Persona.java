@@ -13,77 +13,78 @@ public class Persona {
     @Column(name = "dni", length = 8, nullable = false)
     private Integer id;
     @Column(name = "nombre_persona", length = 20, nullable = false)
-    private String name;
+    private String nombre;
     @Column(name = "apellidos_persona", length = 40, nullable = false)
-    private String lastName;
+    private String apellido;
     @Column(name = "od_persona")
-    private Long additInfo;
-    @ManyToOne(cascade = CascadeType.ALL)
+    private String odPersona;
+
+
+    @ManyToOne
     @JoinColumn(name = "dni_c")
-    private Persona householdHeadId;
-    @OneToMany(mappedBy = "householdHeadId")
-    private List<Persona> householdMembers;
+    private Persona cabezaHogarId;
+
+    @OneToMany(mappedBy = "cabezaHogarId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Persona> miembrosHogar;
+
     @ManyToOne
-    @JoinColumn(name = "calle", referencedColumnName = "calle", insertable = false, updatable = false)
-    private Vivienda street;
-    @ManyToOne
-    @JoinColumn(name = "numero", referencedColumnName = "numero", insertable = false, updatable = false)
-    private Vivienda houseNum;
+    @JoinColumns({
+            @JoinColumn(name = "calle", referencedColumnName = "calle", insertable = false, updatable = false),
+            @JoinColumn(name = "numero", referencedColumnName = "numero", insertable = false, updatable = false)
+    })
+    private Vivienda vivienda;
 
-    public Vivienda getHouseNum() {
-        return houseNum;
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CasaParticular> casaParticular;
+
+
+    public Vivienda getVivienda() {
+        return vivienda;
     }
 
-    public void setHouseNum(Vivienda houseNum) {
-        this.houseNum = houseNum;
+    public void setVivienda(Vivienda vivienda) {
+        this.vivienda = vivienda;
     }
 
-    public Vivienda getStreet() {
-        return street;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setStreet(Vivienda street) {
-        this.street = street;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public List<Persona> getHouseholdMembers() {
-        return householdMembers;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setHouseholdMembers(List<Persona> householdMembers) {
-        this.householdMembers = householdMembers;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public Persona getHouseholdHeadId() {
-        return householdHeadId;
+    public String getOdPersona() {
+        return odPersona;
     }
 
-    public void setHouseholdHeadId(Persona householdHeadId) {
-        this.householdHeadId = householdHeadId;
+    public void setOdPersona(String odPersona) {
+        this.odPersona = odPersona;
     }
 
-    public Long getAdditInfo() {
-        return additInfo;
+    public Persona getCabezaHogarId() {
+        return cabezaHogarId;
     }
 
-    public void setAdditInfo(Long additInfo) {
-        this.additInfo = additInfo;
+    public void setCabezaHogarId(Persona cabezaHogarId) {
+        this.cabezaHogarId = cabezaHogarId;
     }
 
-    public String getLastName() {
-        return lastName;
+    public List<Persona> getMiembrosHogar() {
+        return miembrosHogar;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setMiembrosHogar(List<Persona> miembrosHogar) {
+        this.miembrosHogar = miembrosHogar;
     }
 
     public Integer getId() {
@@ -92,5 +93,13 @@ public class Persona {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<CasaParticular> getCasaParticular() {
+        return casaParticular;
+    }
+
+    public void setCasaParticular(List<CasaParticular> casaParticular) {
+        this.casaParticular = casaParticular;
     }
 }

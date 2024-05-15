@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 public interface HabitaPisoCrudRepository extends CrudRepository<HabitaPiso, Integer> {
-    public Optional<HabitaPiso> findById(Integer id);
-    public Iterable<HabitaPiso> findAll();
-    public void deleteById(Integer id);
-
+    public Optional<HabitaPiso> findByDni(Long id);
+    public void deleteByDni(Long id);
 }

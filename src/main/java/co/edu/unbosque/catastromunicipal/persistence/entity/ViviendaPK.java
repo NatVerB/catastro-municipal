@@ -1,8 +1,11 @@
 package co.edu.unbosque.catastromunicipal.persistence.entity;
 
+import jakarta.persistence.Embeddable;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Embeddable
 public class ViviendaPK implements Serializable {
 
     private Integer numero;
