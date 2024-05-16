@@ -12,7 +12,9 @@ import java.util.List;
 
 @Repository
 public class BloqueCasasRepository implements BlockHousesRepository {
+    @Autowired
     private BlockHousesMapper mapper;
+    @Autowired
     private BloqueCasasCrudRepository bloqueCasasCrudRepository;
 
     @Override

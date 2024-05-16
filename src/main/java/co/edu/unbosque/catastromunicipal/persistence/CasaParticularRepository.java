@@ -5,6 +5,7 @@ import co.edu.unbosque.catastromunicipal.domain.repository.PrivateHouseRepositor
 import co.edu.unbosque.catastromunicipal.persistence.crud.CasaParticularCrudRepository;
 import co.edu.unbosque.catastromunicipal.persistence.entity.CasaParticular;
 import co.edu.unbosque.catastromunicipal.persistence.mapper.PrivateHousesMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,7 +13,9 @@ import java.util.List;
 
 @Repository
 public class CasaParticularRepository implements PrivateHouseRepository {
+    @Autowired
     private CasaParticularCrudRepository casaParticularCrudRepository;
+    @Autowired
     private PrivateHousesMapper mapper;
 
     @Override

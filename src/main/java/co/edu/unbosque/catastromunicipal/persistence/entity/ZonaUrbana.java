@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "ZonaUrbana")
+@Table(name = "ZonaUrbana", schema = "dbo")
 public class ZonaUrbana {
     @Id
     @Column(name = "nombre_zona")

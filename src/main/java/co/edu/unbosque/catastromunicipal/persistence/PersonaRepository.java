@@ -6,13 +6,16 @@ import co.edu.unbosque.catastromunicipal.domain.repository.PersonRepository;
 import co.edu.unbosque.catastromunicipal.persistence.crud.PersonaCrudRepository;
 import co.edu.unbosque.catastromunicipal.persistence.entity.Persona;
 import co.edu.unbosque.catastromunicipal.persistence.mapper.PersonMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class PersonaRepository implements PersonRepository {
+    @Autowired
     private PersonaCrudRepository personaCrudRepository;
+    @Autowired
     private PersonMapper mapper;
 
     @Override

@@ -3,7 +3,7 @@ package co.edu.unbosque.catastromunicipal.persistence.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "CasaParticular")
+@Table(name = "CasaParticular", schema = "dbo")
 public class CasaParticular {
     @EmbeddedId
     private CasaParticularPK id;

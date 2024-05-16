@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name= "Vivienda")
+@Table(name= "Vivienda", schema = "dbo")
 public class Vivienda {
     @EmbeddedId
     private ViviendaPK id;

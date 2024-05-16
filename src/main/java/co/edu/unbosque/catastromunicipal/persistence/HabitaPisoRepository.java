@@ -5,6 +5,7 @@ import co.edu.unbosque.catastromunicipal.domain.repository.FlatResidentRepositor
 import co.edu.unbosque.catastromunicipal.persistence.crud.HabitaPisoCrudRepository;
 import co.edu.unbosque.catastromunicipal.persistence.entity.HabitaPiso;
 import co.edu.unbosque.catastromunicipal.persistence.mapper.FlatResidentMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,7 +13,9 @@ import java.util.List;
 
 @Repository
 public class HabitaPisoRepository implements FlatResidentRepository {
+    @Autowired
     private HabitaPisoCrudRepository habitaPisoCrudRepository;
+    @Autowired
     private FlatResidentMapper mapper;
 
     @Override

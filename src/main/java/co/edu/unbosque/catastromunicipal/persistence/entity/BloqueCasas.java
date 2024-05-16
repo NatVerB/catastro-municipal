@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "BloqueCasas")
+@Table(name = "BloqueCasas", schema = "dbo")
 public class BloqueCasas {
 
     @EmbeddedId

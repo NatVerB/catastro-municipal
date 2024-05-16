@@ -5,6 +5,7 @@ import co.edu.unbosque.catastromunicipal.domain.repository.FloorRepository;
 import co.edu.unbosque.catastromunicipal.persistence.crud.PisoCrudRepository;
 import co.edu.unbosque.catastromunicipal.persistence.entity.Piso;
 import co.edu.unbosque.catastromunicipal.persistence.mapper.FloorMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,7 +13,9 @@ import java.util.List;
 
 @Repository
 public class PisoRepository implements FloorRepository {
+    @Autowired
     private PisoCrudRepository pisoCrudRepository;
+    @Autowired
     private FloorMapper mapper;
 
     @Override

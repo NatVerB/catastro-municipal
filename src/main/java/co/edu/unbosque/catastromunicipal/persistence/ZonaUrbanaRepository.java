@@ -5,6 +5,7 @@ import co.edu.unbosque.catastromunicipal.domain.repository.UrbanZoneRepository;
 import co.edu.unbosque.catastromunicipal.persistence.crud.ZonaUrbanaCrudRepository;
 import co.edu.unbosque.catastromunicipal.persistence.entity.ZonaUrbana;
 import co.edu.unbosque.catastromunicipal.persistence.mapper.UrbanZoneMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,7 +13,9 @@ import java.util.List;
 @Repository
 
 public class ZonaUrbanaRepository implements UrbanZoneRepository {
+    @Autowired
     private ZonaUrbanaCrudRepository zonaUrbanaCrudRepository;
+    @Autowired
     private UrbanZoneMapper mapper;
 
     @Override

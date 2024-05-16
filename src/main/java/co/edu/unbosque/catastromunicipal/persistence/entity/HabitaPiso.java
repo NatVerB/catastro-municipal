@@ -3,7 +3,7 @@ package co.edu.unbosque.catastromunicipal.persistence.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "HabitaPiso")
+@Table(name = "HabitaPiso", schema = "dbo")
 public class HabitaPiso {
     @Id
     private Integer dni;

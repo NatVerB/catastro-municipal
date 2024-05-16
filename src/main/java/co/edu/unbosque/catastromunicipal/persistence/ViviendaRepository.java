@@ -5,6 +5,7 @@ import co.edu.unbosque.catastromunicipal.domain.repository.HousingRepository;
 import co.edu.unbosque.catastromunicipal.persistence.crud.ViviendaCrudRepository;
 import co.edu.unbosque.catastromunicipal.persistence.entity.Vivienda;
 import co.edu.unbosque.catastromunicipal.persistence.mapper.HousingMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,7 +13,9 @@ import java.util.List;
 @Repository
 
 public class ViviendaRepository implements HousingRepository {
+    @Autowired
     private ViviendaCrudRepository viviendaCrudRepository;
+    @Autowired
     private HousingMapper mapper;
 
     @Override
