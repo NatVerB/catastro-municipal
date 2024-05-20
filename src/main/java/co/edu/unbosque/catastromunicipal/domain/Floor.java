@@ -3,26 +3,13 @@ package co.edu.unbosque.catastromunicipal.domain;
 public class Floor {
     private Integer number;
     private String street;
-    private String stair;
+    private Character stair;
     private Integer level;
     private String door;
 
     private Integer meters;
     private String floorOd;
-    private BlockHouses blockHouses;
-    private FlatResident flatResident;
-    private Person person;
 
-    //falta el de la persona private Person person;
-
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
 
     public Integer getNumber() {
         return number;
@@ -40,11 +27,11 @@ public class Floor {
         this.street = street;
     }
 
-    public String getStair() {
+    public Character getStair() {
         return stair;
     }
 
-    public void setStair(String stair) {
+    public void setStair(Character stair) {
         this.stair = stair;
     }
 
@@ -78,21 +65,5 @@ public class Floor {
 
     public void setFloorOd(String floorOd) {
         this.floorOd = floorOd;
-    }
-
-    public BlockHouses getBlockHouses() {
-        return blockHouses;
-    }
-
-    public void setBlockHouses(BlockHouses blockHouses) {
-        this.blockHouses = blockHouses;
-    }
-
-    public FlatResident getFlatResident() {
-        return flatResident;
-    }
-
-    public void setFlatResident(FlatResident flatResident) {
-        this.flatResident = flatResident;
     }
 }

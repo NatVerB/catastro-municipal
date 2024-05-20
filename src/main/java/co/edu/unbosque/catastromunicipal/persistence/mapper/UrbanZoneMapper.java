@@ -14,12 +14,12 @@ public interface UrbanZoneMapper {
 
     @Mappings({
             @Mapping(source = "nombreZona", target = "zoneName"),
-            @Mapping(source = "odZona", target = "zoneOd"),
-            @Mapping(source = "vivienda", target = "housings")
+            @Mapping(source = "odZona", target = "zoneOd")
     })
     UrbanZone toUrbanZone(ZonaUrbana zonaUrbana);
     List<UrbanZone> toUrbanZones(List<ZonaUrbana> zonaUrbanas);
 
     @InheritInverseConfiguration
+    @Mapping(target="vivienda", ignore = true)
     ZonaUrbana toZonaUrbana(UrbanZone urbanZone);
 }

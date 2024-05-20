@@ -6,60 +6,92 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FloorService {
     @Autowired
     private FloorRepository floorRepository;
 
-    public List<Floor> getAllFloors(){
+    public List<Floor> getAllFloors() {
         return floorRepository.getAllFloors();
     }
-    public List<Floor> getFloorsByNumber(Integer number){
+
+    public Optional<List<Floor>> getFloorsByNumber(Integer number) {
         return floorRepository.getFloorsByNumber(number);
     }
-    public List<Floor> getFloorsByStreet(String street){
+
+    public Optional<List<Floor>> getFloorsByStreet(String street) {
         return floorRepository.getFloorsByStreet(street);
     }
-    public List<Floor> getFloorsByStair(Character stair){
+
+    public Optional<List<Floor>> getFloorsByStair(Character stair) {
         return floorRepository.getFloorsByStair(stair);
     }
-    public List<Floor> getFloorsByLevel(Integer level){
+
+    public Optional<List<Floor>> getFloorsByLevel(Integer level) {
         return floorRepository.getFloorsByLevel(level);
     }
-    public List<Floor> getFloorsByDoor(String door){
+
+    public Optional<List<Floor>> getFloorsByDoor(String door) {
         return floorRepository.getFloorsByDoor(door);
     }
-    public void deleteFloorByNumber(Integer number){
-        if(!getFloorsByNumber(number).isEmpty()){
+
+    public boolean deleteFloorByNumber(Integer number) {
+        if (getFloorsByNumber(number).isPresent()) {
             floorRepository.deleteFloorByNumber(number);
-        }
-    }
-    public void deleteFloorByStreet(String street){
-        if(!getFloorsByStreet(street).isEmpty()){
-            floorRepository.deleteFloorByStreet(street);
-        }
-    }
-    public void deleteFloorByStair(Character stair){
-        if(!getFloorsByStair(stair).isEmpty()){
-            floorRepository.deleteFloorByStair(stair);
-        }
-    }
-    public void deleteFloorByLevel(Integer level){
-        if(!getFloorsByLevel(level).isEmpty()){
-            floorRepository.deleteFloorByLevel(level);
-        }
-    }
-    public void deleteFloorByDoor(String door){
-        if(!getFloorsByDoor(door).isEmpty()){
-            floorRepository.deleteFloorByDoor(door);
+            return true;
+        }else{
+            return false;
         }
     }
 
-    public Floor saveFloor(Floor floor){
+    public boolean deleteFloorByStreet(String street) {
+        if (getFloorsByStreet(street).isPresent()) {
+            floorRepository.deleteFloorByStreet(street);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean deleteFloorByStair(Character stair) {
+        if (getFloorsByStair(stair).isPresent()) {
+            floorRepository.deleteFloorByStair(stair);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean deleteFloorByLevel(Integer level) {
+        if (getFloorsByLevel(level).isPresent()) {
+            floorRepository.deleteFloorByLevel(level);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean deleteFloorByDoor(String door) {
+        if (getFloorsByDoor(door).isPresent()) {
+            floorRepository.deleteFloorByDoor(door);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public Floor saveFloor(Floor floor) {
         return floorRepository.saveFloor(floor);
     }
-    public Floor updateFloor(Floor floor){
-        return floorRepository.updateFloor(floor);
+
+    public boolean updateFloor(Floor floor) {
+        if (getFloorsByStreet(floor.getStreet()).isPresent() && getFloorsByDoor(floor.getDoor()).isPresent() && getFloorsByNumber(floor.getNumber()).isPresent() && getFloorsByLevel(floor.getLevel()).isPresent()&& getFloorsByStair(floor.getStair()).isPresent()) {
+            floorRepository.updateFloor(floor);
+            return true;
+        }else{
+            return false;
+        }
     }
 }

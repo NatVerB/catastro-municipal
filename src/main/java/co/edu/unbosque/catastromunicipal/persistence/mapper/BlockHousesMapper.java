@@ -15,13 +15,15 @@ public interface BlockHousesMapper {
             @Mapping(source = "id.numero", target = "number"),
             @Mapping(source = "id.calle", target = "street"),
             @Mapping(source = "metrosBloque", target = "blockMeters"),
-            @Mapping(source = "odBloque", target = "blockOd"),
-            @Mapping(source = "vivienda", target = "housing"),
-            @Mapping(source = "pisos", target = "floors")
+            @Mapping(source = "odBloque", target = "blockOd")
     })
     BlockHouses toBlockHouses(BloqueCasas bloqueCasas);
     List<BlockHouses> toBlockHouses(List<BloqueCasas> bloqueCasas);
 
     @InheritInverseConfiguration
+    @Mappings({
+            @Mapping(target="pisos", ignore = true),
+            @Mapping(target="vivienda", ignore = true)
+    })
     BloqueCasas toBloqueCasas(BlockHouses blockHouses);
 }

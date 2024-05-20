@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 
@@ -25,14 +26,14 @@ public class ZonaUrbanaRepository implements UrbanZoneRepository {
     }
 
     @Override
-    public List<UrbanZone> getUrbanZoneByName(String name) {
+    public Optional<List<UrbanZone>> getUrbanZoneByName(String name) {
         List<ZonaUrbana> zonas = (List<ZonaUrbana>) zonaUrbanaCrudRepository.findByNombreZona(name);
-        return mapper.toUrbanZones(zonas);
+        return Optional.of(mapper.toUrbanZones(zonas));
     }
 
     @Override
     public void deleteUrbanZoneByName(String name) {
-        zonaUrbanaCrudRepository.deleteByNombreZona(name);
+        zonaUrbanaCrudRepository.deleteById(name);
     }
 
     @Override
@@ -44,10 +45,6 @@ public class ZonaUrbanaRepository implements UrbanZoneRepository {
     @Override
     public UrbanZone updateUrbanZone(UrbanZone urbanZone) {
         ZonaUrbana zonaUrbana = mapper.toZonaUrbana(urbanZone);
-        if (zonaUrbana.getNombreZona() != null && zonaUrbanaCrudRepository.existsById(zonaUrbana.getNombreZona())) {
-            return mapper.toUrbanZone(zonaUrbanaCrudRepository.save(zonaUrbana));
-        } else {
-            throw new RuntimeException("No se puede actualizar el BloqueCasas porque no existe en la base de datos.");
-        }
+        return mapper.toUrbanZone(zonaUrbanaCrudRepository.save(zonaUrbana));
     }
 }

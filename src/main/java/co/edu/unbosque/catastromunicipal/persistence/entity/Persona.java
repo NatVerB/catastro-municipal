@@ -18,14 +18,12 @@ public class Persona {
     private String apellido;
     @Column(name = "od_persona")
     private String odPersona;
-
-
-    @ManyToOne
-    @JoinColumn(name = "dni_c")
-    private Persona cabezaHogarId;
-
-    @OneToMany(mappedBy = "cabezaHogarId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Persona> miembrosHogar;
+    @Column(name = "dni_c",insertable = false, updatable = false)
+    private Integer dniC;
+    @Column(name = "calle")
+    private String calle;
+    @Column(name = "numero")
+    private Integer numero;
 
     @ManyToOne
     @JoinColumns({
@@ -38,6 +36,29 @@ public class Persona {
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CasaParticular> casaParticular;
 
+    public Integer getDniC() {
+        return dniC;
+    }
+
+    public void setDniC(Integer dniC) {
+        this.dniC = dniC;
+    }
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
 
     public Vivienda getVivienda() {
         return vivienda;
@@ -69,22 +90,6 @@ public class Persona {
 
     public void setOdPersona(String odPersona) {
         this.odPersona = odPersona;
-    }
-
-    public Persona getCabezaHogarId() {
-        return cabezaHogarId;
-    }
-
-    public void setCabezaHogarId(Persona cabezaHogarId) {
-        this.cabezaHogarId = cabezaHogarId;
-    }
-
-    public List<Persona> getMiembrosHogar() {
-        return miembrosHogar;
-    }
-
-    public void setMiembrosHogar(List<Persona> miembrosHogar) {
-        this.miembrosHogar = miembrosHogar;
     }
 
     public Integer getId() {

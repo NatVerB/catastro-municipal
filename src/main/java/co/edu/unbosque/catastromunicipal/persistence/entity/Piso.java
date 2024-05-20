@@ -22,14 +22,12 @@ public class Piso {
     })
     private BloqueCasas bloqueCasas;
 
-
     @ManyToOne
-    @JoinColumn(name = "dni_p", referencedColumnName = "dni")
+    @JoinColumn(name = "dni_p", referencedColumnName = "dni", insertable = false, updatable = false)
     private Persona persona;
 
     @OneToOne(mappedBy = "piso", cascade =  CascadeType.ALL, orphanRemoval = true)
     private HabitaPiso habitaPiso;
-
 
 
     public PisoPK getId() {
@@ -51,8 +49,6 @@ public class Piso {
     public void setOdPiso(String odPiso) {
         this.odPiso = odPiso;
     }
-
-
 
     public BloqueCasas getBloqueCasas() {
         return bloqueCasas;
@@ -81,4 +77,6 @@ public class Piso {
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
+
+
 }

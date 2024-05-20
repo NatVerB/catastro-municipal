@@ -18,14 +18,16 @@ public interface FloorMapper {
             @Mapping(source = "id.planta", target = "level"),
             @Mapping(source = "id.puerta", target = "door"),
             @Mapping(source = "metrosP", target = "meters"),
-            @Mapping(source = "odPiso", target = "floorOd"),
-            @Mapping(source = "bloqueCasas", target = "blockHouses"),
-            @Mapping(source = "habitaPiso", target = "flatResident"),
-            @Mapping(source = "persona", target = "person")
+            @Mapping(source = "odPiso", target = "floorOd")
     })
     Floor toFloor(Piso piso);
     List<Floor> toFloors(List<Piso> pisos);
 
     @InheritInverseConfiguration
+    @Mappings({
+            @Mapping(target = "persona", ignore = true),
+            @Mapping(target = "bloqueCasas", ignore = true),
+            @Mapping(target = "habitaPiso", ignore = true)
+    })
     Piso toPiso(Floor floor);
 }

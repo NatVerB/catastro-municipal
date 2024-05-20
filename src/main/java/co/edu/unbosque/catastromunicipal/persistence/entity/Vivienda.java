@@ -22,12 +22,16 @@ public class Vivienda {
     @Column(name = "od_vivienda")
     private String odVivienda;
 
+    @Column(name = "nombre_zona")
+    private String nombreZona;
+
+
+
     //Relaciones
     //Relacion con zona urbana
     @ManyToOne
-    @JoinColumn(name = "nombre_zona", referencedColumnName = "nombre_zona")
+    @JoinColumn(name = "nombre_zona", referencedColumnName = "nombre_zona", insertable = false, updatable = false)
     private ZonaUrbana zonaUrbana;
-
 
     //Relacion con bloque casas
     @OneToOne(mappedBy = "vivienda", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -42,6 +46,14 @@ public class Vivienda {
 
 // Getters y setters
 
+
+    public String getNombreZona() {
+        return nombreZona;
+    }
+
+    public void setNombreZona(String nombreZona) {
+        this.nombreZona = nombreZona;
+    }
 
     public ViviendaPK getId() {
         return id;

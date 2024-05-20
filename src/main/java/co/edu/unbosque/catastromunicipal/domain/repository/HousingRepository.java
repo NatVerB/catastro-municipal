@@ -3,11 +3,12 @@ package co.edu.unbosque.catastromunicipal.domain.repository;
 import co.edu.unbosque.catastromunicipal.domain.Housing;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface HousingRepository {
     List<Housing> getAllHousings();
-    List<Housing> getHousingByNumber(Integer number);
-    List<Housing> getHousingByStreet(String street);
+    Optional<List<Housing>> getHousingByNumber(Integer number);
+    Optional<List<Housing>> getHousingByStreet(String street);
     void deleteHousingByNumber(Integer number);
     void deleteHousingByStreet(String street);
     Housing saveHousing(Housing housing);

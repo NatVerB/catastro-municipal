@@ -9,7 +9,7 @@ import java.util.List;
 public class BloqueCasas {
 
     @EmbeddedId
-    private BloqueCasasPK id;
+    private ViviendaPK id;
 
     @Column(name = "metros_b")
     private int metrosBloque;
@@ -32,11 +32,12 @@ public class BloqueCasas {
 
     // getters y setters
 
-    public BloqueCasasPK getId() {
+
+    public ViviendaPK getId() {
         return id;
     }
 
-    public void setId(BloqueCasasPK id) {
+    public void setId(ViviendaPK id) {
         this.id = id;
     }
 

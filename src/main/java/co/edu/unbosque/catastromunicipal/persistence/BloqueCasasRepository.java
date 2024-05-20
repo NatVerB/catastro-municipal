@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class BloqueCasasRepository implements BlockHousesRepository {
@@ -24,15 +25,15 @@ public class BloqueCasasRepository implements BlockHousesRepository {
     }
 
     @Override
-    public List<BlockHouses> getBlockHousesByStreet(String calle){
-        List<BloqueCasas> bloqueCasas =  (List<BloqueCasas>) bloqueCasasCrudRepository.findById_Calle(calle);
-        return mapper.toBlockHouses(bloqueCasas);
+    public Optional<List<BlockHouses>> getBlockHousesByStreet(String calle){
+        List<BloqueCasas> bloqueCasas =  bloqueCasasCrudRepository.findById_Calle(calle);
+        return Optional.of(mapper.toBlockHouses(bloqueCasas));
     }
 
     @Override
-    public List<BlockHouses> getBlockHousesByNumber(Integer numero){
+    public Optional<List<BlockHouses>> getBlockHousesByNumber(Integer numero){
         List<BloqueCasas> bloqueCasas =  (List<BloqueCasas>) bloqueCasasCrudRepository.findById_Numero(numero);
-        return mapper.toBlockHouses(bloqueCasas);
+        return Optional.of(mapper.toBlockHouses(bloqueCasas));
     }
 
     @Override
@@ -54,7 +55,7 @@ public class BloqueCasasRepository implements BlockHousesRepository {
     @Override
     public BlockHouses updateBlockHouses(BlockHouses blockHouses){
         BloqueCasas bloqueCasas = mapper.toBloqueCasas(blockHouses);
-        if (bloqueCasas.getId() != null && bloqueCasasCrudRepository.existsById(bloqueCasas.getId())) {
+        if (bloqueCasas.getId() != null && bloqueCasasCrudRepository.findById_Numero(blockHouses.getNumber())!=null) {
             return mapper.toBlockHouses(bloqueCasasCrudRepository.save(bloqueCasas));
         } else {
             throw new RuntimeException("No se puede actualizar el BloqueCasas porque no existe en la base de datos.");

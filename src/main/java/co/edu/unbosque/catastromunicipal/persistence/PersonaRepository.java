@@ -32,7 +32,7 @@ public class PersonaRepository implements PersonRepository {
 
     @Override
     public Person getById(Integer id) {
-        Persona personas = (Persona) personaCrudRepository.findPersonaById(id);
+        Persona personas = personaCrudRepository.findPersonaById(id);
         return mapper.toPerson(personas);
     }
 

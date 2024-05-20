@@ -14,7 +14,7 @@ public class ZonaUrbana {
     @Column(name = "od_zona")
     private String odZona;
 
-    @OneToMany(mappedBy = "zonaUrbana")
+    @OneToMany(mappedBy = "zonaUrbana", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Vivienda> vivienda;
 
     public String getNombreZona() {

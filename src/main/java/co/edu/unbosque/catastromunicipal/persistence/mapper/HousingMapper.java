@@ -18,14 +18,17 @@ public interface HousingMapper {
             @Mapping(source = "codigoPostal", target = "postalCode"),
             @Mapping(source = "metrosCuadrados", target = "meters"),
             @Mapping(source = "odVivienda", target = "housingOd"),
-            @Mapping(source = "zonaUrbana", target = "urbanZone"),
-            @Mapping(source = "bloqueCasas", target = "blockHouses"),
-            @Mapping(source = "casaParticular", target = "privateHouse"),
-            @Mapping(source = "personas", target = "people")
+            @Mapping(source = "nombreZona", target = "zoneName")
     })
     Housing toHousing(Vivienda vivienda);
     List<Housing> toHousingList(List<Vivienda> viviendas);
 
     @InheritInverseConfiguration
+    @Mappings({
+            @Mapping(target = "bloqueCasas", ignore = true),
+            @Mapping(target = "casaParticular", ignore = true),
+            @Mapping(target = "personas", ignore = true),
+            @Mapping(target = "zonaUrbana", ignore = true)
+    })
     Vivienda toVivienda(Housing housing);
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class PisoRepository implements FloorRepository {
@@ -25,33 +26,33 @@ public class PisoRepository implements FloorRepository {
     }
 
     @Override
-    public List<Floor> getFloorsByNumber(Integer number) {
-        List<Piso> floors = (List<Piso>) pisoCrudRepository.getById_Numero(number);
-        return mapper.toFloors(floors);
+    public Optional<List<Floor>> getFloorsByNumber(Integer number) {
+        List<Piso> floors = pisoCrudRepository.getById_Numero(number);
+        return Optional.of(mapper.toFloors(floors));
     }
 
     @Override
-    public List<Floor> getFloorsByStreet(String street) {
-        List<Piso> floors = (List<Piso>) pisoCrudRepository.getById_Calle(street);
-        return mapper.toFloors(floors);
+    public Optional<List<Floor>> getFloorsByStreet(String street) {
+        List<Piso> floors = pisoCrudRepository.getById_Calle(street);
+        return Optional.of(mapper.toFloors(floors));
     }
 
     @Override
-    public List<Floor> getFloorsByStair(Character stair) {
-        List<Piso> floors = (List<Piso>) pisoCrudRepository.getById_Escalera(stair);
-        return mapper.toFloors(floors);
+    public Optional<List<Floor>> getFloorsByStair(Character stair) {
+        List<Piso> floors = pisoCrudRepository.getById_Escalera(stair);
+        return Optional.of(mapper.toFloors(floors));
     }
 
     @Override
-    public List<Floor> getFloorsByLevel(Integer level) {
-        List<Piso> floors = (List<Piso>) pisoCrudRepository.getById_Planta(level);
-        return mapper.toFloors(floors);
+    public Optional<List<Floor>> getFloorsByLevel(Integer level) {
+        List<Piso> floors =  pisoCrudRepository.getById_Planta(level);
+        return Optional.of(mapper.toFloors(floors));
     }
 
     @Override
-    public List<Floor> getFloorsByDoor(String door) {
-        List<Piso> floors = (List<Piso>) pisoCrudRepository.getById_Puerta(door);
-        return mapper.toFloors(floors);
+    public Optional<List<Floor>> getFloorsByDoor(String door) {
+        List<Piso> floors =  pisoCrudRepository.getById_Puerta(door);
+        return Optional.of(mapper.toFloors(floors));
     }
 
     @Override

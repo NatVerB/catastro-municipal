@@ -16,12 +16,15 @@ public interface PrivateHousesMapper {
             @Mapping(source = "id.calle", target = "street"),
             @Mapping(source = "metrosC", target = "meters"),
             @Mapping(source = "odCasa", target = "houseOd"),
-            @Mapping(source = "vivienda", target = "housing"),
-            @Mapping(source = "persona", target = "person")
+            @Mapping(source = "dniCp", target = "dniCp")
     })
     PrivateHouse toPrivateHouse(CasaParticular casaParticular);
     List<PrivateHouse> toPrivateHouses(List<CasaParticular> casaParticulars);
 
     @InheritInverseConfiguration
+    @Mappings({
+            @Mapping(target = "persona", ignore = true),
+            @Mapping(target = "vivienda", ignore = true)
+    })
     CasaParticular toCasaParticular(PrivateHouse privateHouse);
 }

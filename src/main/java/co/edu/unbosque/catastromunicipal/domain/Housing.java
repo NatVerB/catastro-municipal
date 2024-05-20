@@ -1,6 +1,9 @@
 package co.edu.unbosque.catastromunicipal.domain;
 
+import co.edu.unbosque.catastromunicipal.domain.service.UrbanZoneService;
+
 import java.util.List;
+import java.util.Optional;
 
 public class Housing {
 
@@ -10,33 +13,15 @@ public class Housing {
     private Integer postalCode;
     private Integer meters;
     private String housingOd;
-    private UrbanZone urbanZone;
-    private BlockHouses blockHouses;
-    private PrivateHouse privateHouse;
-    private List<Person> people;
+    private String zoneName;
 
-    public List<Person> getPeople() {
-        return people;
+
+    public String getZoneName() {
+        return zoneName;
     }
 
-    public void setPeople(List<Person> people) {
-        this.people = people;
-    }
-
-    public BlockHouses getBlockHouses() {
-        return blockHouses;
-    }
-
-    public void setBlockHouses(BlockHouses blockHouses) {
-        this.blockHouses = blockHouses;
-    }
-
-    public PrivateHouse getPrivateHouse() {
-        return privateHouse;
-    }
-
-    public void setPrivateHouse(PrivateHouse privateHouse) {
-        this.privateHouse = privateHouse;
+    public void setZoneName(String zoneName) {
+        this.zoneName = zoneName;
     }
 
     public Integer getNumber() {
@@ -85,13 +70,5 @@ public class Housing {
 
     public void setHousingOd(String housingOd) {
         this.housingOd = housingOd;
-    }
-
-    public UrbanZone getUrbanZone() {
-        return urbanZone;
-    }
-
-    public void setUrbanZone(UrbanZone urbanZone) {
-        this.urbanZone = urbanZone;
     }
 }

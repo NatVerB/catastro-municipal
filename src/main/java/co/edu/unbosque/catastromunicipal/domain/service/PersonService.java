@@ -18,16 +18,10 @@ public class PersonService {
     public List<Person> getAllPersons(){
         return personRepository.getAllPersons();
     }
-    public Person getById(Integer id){
-        return personRepository.getById(id);
     }
-    public void deleteById(Integer id){
-        if(getById(id) != null){
             personRepository.deleteById(id);
         }
     }
-    public Person update(Person person){
-        return personRepository.update(person);
     }
 
 }

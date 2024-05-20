@@ -5,18 +5,14 @@ public class PrivateHouse {
     private String street;
     private Integer meters;
     private String houseOd;
-    private Housing housing;
-    private Person person;
+    private Integer dniCp;
 
-    // falta el de private Person person;
-
-
-    public Person getPerson() {
-        return person;
+    public Integer getDniCp() {
+        return dniCp;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setDniCp(Integer dniCp) {
+        this.dniCp = dniCp;
     }
 
     public Integer getNumber() {
@@ -51,11 +47,4 @@ public class PrivateHouse {
         this.houseOd = houseOd;
     }
 
-    public Housing getHousing() {
-        return housing;
-    }
-
-    public void setHousing(Housing housing) {
-        this.housing = housing;
-    }
 }

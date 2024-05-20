@@ -12,6 +12,6 @@ public interface CasaParticularCrudRepository extends CrudRepository<CasaParticu
     List<CasaParticular> findById_Numero(Integer numero);
     void deleteById_Calle(String calle);
     void deleteById_Numero(Integer numero);
-    void getById_Calle(String calle);
-    void getById_Numero(Integer numero);
+    List<CasaParticular> getById_Calle(String calle);
+    CasaParticular getById_Numero(Integer numero);
 }

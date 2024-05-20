@@ -17,14 +17,19 @@ public interface PersonMapper {
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "apellido", target = "lastName"),
             @Mapping(source = "odPersona", target = "personOd"),
-            @Mapping(source = "cabezaHogarId", target = "headHousehold"),
-            @Mapping(source = "miembrosHogar", target = "members"),
-            @Mapping(source = "vivienda", target = "housing"),
-            @Mapping(source = "casaParticular", target = "privateHouses")
+            @Mapping(source = "dniC", target = "dniC"),
+            @Mapping(source = "numero", target = "number"),
+            @Mapping(source = "calle", target = "street")
+
     })
     Person toPerson(Persona persona);
     List<Person> toPersons(List<Persona> personas);
 
     @InheritInverseConfiguration
+    @Mappings({
+            @Mapping(target = "vivienda", ignore = true),
+            @Mapping(target = "casaParticular", ignore = true)
+    })
     Persona toPersona(Person persona);
+    List<Persona> toPersonas(List<Persona> personas);
 }

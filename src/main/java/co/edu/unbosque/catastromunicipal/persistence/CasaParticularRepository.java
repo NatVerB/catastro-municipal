@@ -7,9 +7,8 @@ import co.edu.unbosque.catastromunicipal.persistence.entity.CasaParticular;
 import co.edu.unbosque.catastromunicipal.persistence.mapper.PrivateHousesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class CasaParticularRepository implements PrivateHouseRepository {
@@ -25,15 +24,15 @@ public class CasaParticularRepository implements PrivateHouseRepository {
     }
 
     @Override
-    public List<PrivateHouse> getPrivateHousesByNumber(Integer number) {
-        List<CasaParticular> casaParticular = (List<CasaParticular>) casaParticularCrudRepository.findById_Numero(number);
-        return mapper.toPrivateHouses(casaParticular);
+    public Optional<List<PrivateHouse>> getPrivateHousesByNumber(Integer number) {
+        List<CasaParticular> casaParticular = casaParticularCrudRepository.findById_Numero(number);
+        return Optional.of(mapper.toPrivateHouses(casaParticular));
     }
 
     @Override
-    public List<PrivateHouse> getPrivateHousesByStreet(String street) {
-        List<CasaParticular> casaParticular = (List<CasaParticular>)casaParticularCrudRepository.findById_Calle(street);
-        return mapper.toPrivateHouses(casaParticular);
+    public Optional<List<PrivateHouse>> getPrivateHousesByStreet(String street) {
+        List<CasaParticular> casaParticular = casaParticularCrudRepository.findById_Calle(street);
+        return Optional.of(mapper.toPrivateHouses(casaParticular));
     }
 
     @Override
@@ -55,7 +54,7 @@ public class CasaParticularRepository implements PrivateHouseRepository {
     @Override
     public PrivateHouse updatePrivateHouse(PrivateHouse privateHouse) {
         CasaParticular casaParticular= mapper.toCasaParticular(privateHouse);
-        if (casaParticular.getId() != null && casaParticularCrudRepository.existsById(casaParticular.getId())) {
+        if (casaParticular.getId() != null && casaParticularCrudRepository.getById_Numero(privateHouse.getNumber())!=null) {
             return mapper.toPrivateHouse(casaParticularCrudRepository.save(casaParticular));
         } else {
             throw new RuntimeException("No se puede actualizar CasaParticular porque no existe en la base de datos.");

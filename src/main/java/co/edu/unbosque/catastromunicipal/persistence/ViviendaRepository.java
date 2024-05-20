@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 
@@ -25,15 +26,15 @@ public class ViviendaRepository implements HousingRepository {
     }
 
     @Override
-    public List<Housing> getHousingByNumber(Integer number) {
-        List<Vivienda> viviendas = (List<Vivienda>) viviendaCrudRepository.getById_Numero(number);
-        return mapper.toHousingList(viviendas);
+    public Optional<List<Housing>> getHousingByNumber(Integer number) {
+        List<Vivienda> viviendas =  viviendaCrudRepository.getById_Numero(number);
+        return Optional.of(mapper.toHousingList(viviendas));
     }
 
     @Override
-    public List<Housing> getHousingByStreet(String street) {
-        List<Vivienda> viviendas = (List<Vivienda>) viviendaCrudRepository.findById_Calle(street);
-        return mapper.toHousingList(viviendas);
+    public Optional<List<Housing>> getHousingByStreet(String street) {
+        List<Vivienda> viviendas =  viviendaCrudRepository.getById_Calle(street);
+        return Optional.of(mapper.toHousingList(viviendas));
     }
 
     @Override

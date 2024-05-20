@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "CasaParticular", schema = "dbo")
 public class CasaParticular {
     @EmbeddedId
-    private CasaParticularPK id;
+    private ViviendaPK id;
 
     @Column(name = "metros_c")
     private Integer metrosC;
@@ -14,10 +14,12 @@ public class CasaParticular {
     @Column(name = "od_casa")
     private String odCasa;
 
+    @Column(name = "dni_cp")
+    private Integer dniCp;
 
     //Relaciones
     @ManyToOne
-    @JoinColumn(name = "dni_cp", referencedColumnName = "dni")
+    @JoinColumn(name = "dni_cp", referencedColumnName = "dni", insertable = false, updatable = false)
     private Persona persona;
 
     @OneToOne
@@ -30,11 +32,19 @@ public class CasaParticular {
     //getters y setters
 
 
-    public CasaParticularPK getId() {
+    public Integer getDniCp() {
+        return dniCp;
+    }
+
+    public void setDniCp(Integer dniCp) {
+        this.dniCp = dniCp;
+    }
+
+    public ViviendaPK getId() {
         return id;
     }
 
-    public void setId(CasaParticularPK id) {
+    public void setId(ViviendaPK id) {
         this.id = id;
     }
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class HabitaPisoRepository implements FlatResidentRepository {
@@ -25,14 +26,14 @@ public class HabitaPisoRepository implements FlatResidentRepository {
     }
 
     @Override
-    public List<FlatResident> getFlatResidentsByDni(Integer dni) {
-        List<HabitaPiso> flatResidents = (List<HabitaPiso>) habitaPisoCrudRepository.findByDni(dni);
-        return mapper.toFlatResidents(flatResidents);
+    public Optional<List<FlatResident>> getFlatResidentsByDni(Integer dni) {
+        List<HabitaPiso> flatResidents = habitaPisoCrudRepository.findByDni(dni);
+        return Optional.of(mapper.toFlatResidents(flatResidents));
     }
 
     @Override
     public void deleteFlatResidentByDni(Integer dni) {
-        habitaPisoCrudRepository.deleteByDni(dni);
+        habitaPisoCrudRepository.deleteById(dni);
     }
 
     @Override
