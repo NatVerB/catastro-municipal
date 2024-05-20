@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BlockHousesService {
@@ -17,22 +18,28 @@ public class BlockHousesService {
         return blockHousesRepository.getAllBlockHouses();
     }
 
-    public List<BlockHouses> getBlockHousesByStreet(String name) {
+    public Optional<List<BlockHouses>> getBlockHousesByStreet(String name) {
         return blockHousesRepository.getBlockHousesByStreet(name);
     }
 
-    public List<BlockHouses> getBlockHousesByNumber(Integer number) {
+    public Optional<List<BlockHouses>> getBlockHousesByNumber(Integer number) {
         return blockHousesRepository.getBlockHousesByNumber(number);
     }
-    public void deleteBlockHousesByNumber(Integer number){
-        if(!getBlockHousesByNumber(number).isEmpty()){
+    public boolean deleteBlockHousesByNumber(Integer number){
+        if(getBlockHousesByNumber(number).isPresent()){
             blockHousesRepository.deleteBlockHousesByNumber(number);
+            return true;
+        }else{
+            return false;
         }
     }
 
-    public void deleteBlockHousesByStreet(String street){
-        if(!getBlockHousesByStreet(street).isEmpty()){
+    public boolean deleteBlockHousesByStreet(String street){
+        if(getBlockHousesByStreet(street).isPresent()){
             blockHousesRepository.deleteBlockHousesByStreet(street);
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -40,8 +47,13 @@ public class BlockHousesService {
         return blockHousesRepository.saveBlockHouses(blockHouses);
     }
 
-    public BlockHouses updateBlockHouses(BlockHouses blockHouses){
-        return blockHousesRepository.updateBlockHouses(blockHouses);
+    public boolean updateBlockHouses(BlockHouses blockHouses){
+        if(getBlockHousesByNumber(blockHouses.getNumber()).isPresent()&&getBlockHousesByStreet(blockHouses.getStreet()).isPresent()){
+            blockHousesRepository.updateBlockHouses(blockHouses);
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

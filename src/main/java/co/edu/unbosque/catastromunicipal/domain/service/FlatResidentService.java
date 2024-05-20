@@ -6,32 +6,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FlatResidentService {
     @Autowired
     private FlatResidentRepository flatResidentRepository;
 
-    public List<FlatResident> getAllFlatResidents(){
+    public List<FlatResident> getAllFlatResidents() {
         return flatResidentRepository.getAllFlatResidents();
     }
 
-    public List<FlatResident> getFlatResidentsByDni(Integer dni){
+    public Optional<List<FlatResident>> getFlatResidentsByDni(Integer dni) {
         return flatResidentRepository.getFlatResidentsByDni(dni);
     }
 
-    public void deleteFlatResidentByDni(Integer dni){
-        if(!getFlatResidentsByDni(dni).isEmpty()){
+    public boolean deleteFlatResidentByDni(Integer dni) {
+        if (getFlatResidentsByDni(dni).isPresent()) {
             flatResidentRepository.deleteFlatResidentByDni(dni);
+            return true;
+        } else {
+            return false;
         }
     }
 
-    public FlatResident saveFlatResident(FlatResident flatResident){
+    public FlatResident saveFlatResident(FlatResident flatResident) {
         return flatResidentRepository.saveFlatResident(flatResident);
     }
 
-    public  FlatResident updateFlatResident(FlatResident flatResident){
-        return flatResidentRepository.updateFlatResident(flatResident);
+    public boolean updateFlatResident(FlatResident flatResident) {
+        if (getFlatResidentsByDni(flatResident.getId()).isPresent()) {
+            flatResidentRepository.updateFlatResident(flatResident);
+            return true;
+        } else {
+            return false;
+        }
     }
-
 }

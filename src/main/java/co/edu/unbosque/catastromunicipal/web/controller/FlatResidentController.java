@@ -3,7 +3,6 @@ package co.edu.unbosque.catastromunicipal.web.controller;
 import co.edu.unbosque.catastromunicipal.domain.FlatResident;
 import co.edu.unbosque.catastromunicipal.domain.service.FlatResidentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
