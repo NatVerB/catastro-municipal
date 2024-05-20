@@ -3,6 +3,9 @@ package co.edu.unbosque.catastromunicipal.web.controller;
 import co.edu.unbosque.catastromunicipal.domain.Floor;
 import co.edu.unbosque.catastromunicipal.domain.service.FloorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,56 +17,92 @@ public class FloorController {
     private FloorService floorService;
 
     @GetMapping("/allfloors")
-    public List<Floor> getAllFloors(){
+    public List<Floor> getAllFloors() {
         return floorService.getAllFloors();
     }
+
     @GetMapping("/floor/bynumber/{id}")
-    public List<Floor> getFloorsByNumber(@PathVariable("id") Integer number){
-        return floorService.getFloorsByNumber(number);
+    public ResponseEntity<List<Floor>> getFloorsByNumber(@PathVariable("id") Integer number) {
+        return floorService.getFloorsByNumber(number).map(floors -> new ResponseEntity<>(floors, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
     @GetMapping("/floor/bystreet/{id}")
-    public List<Floor> getFloorsByStreet(@PathVariable("id") String street){
-        return floorService.getFloorsByStreet(street);
+    public ResponseEntity<List<Floor>> getFloorsByStreet(@PathVariable("id") String street) {
+        return floorService.getFloorsByStreet(street).map(floors -> new ResponseEntity<>(floors, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
     @GetMapping("/floor/bystair/{id}")
-    public List<Floor> getFloorsByStair(@PathVariable("id") Character stair){
-        return floorService.getFloorsByStair(stair);
+    public ResponseEntity<List<Floor>> getFloorsByStair(@PathVariable("id") Character stair) {
+        return floorService.getFloorsByStair(stair).map(floors -> new ResponseEntity<>(floors, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
     @GetMapping("/floor/bylevel/{id}")
-    public List<Floor> getFloorsByLevel(@PathVariable("id") Integer level){
-        return floorService.getFloorsByLevel(level);
+    public ResponseEntity<List<Floor>> getFloorsByLevel(@PathVariable("id") Integer level) {
+        return floorService.getFloorsByLevel(level).map(floors -> new ResponseEntity<>(floors, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
     @GetMapping("/floor/bydoor/{id}")
-    public List<Floor> getFloorsByDoor(@PathVariable("id") String door){
-        return floorService.getFloorsByDoor(door);
+    public ResponseEntity<List<Floor>> getFloorsByDoor(@PathVariable("id") String door) {
+        return floorService.getFloorsByDoor(door).map(floors -> new ResponseEntity<>(floors, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
     @DeleteMapping("/deletefloor/bynumber")
-    public void deleteFloorByNumber(Integer number){
-        floorService.deleteFloorByNumber(number);
+    public ResponseEntity<String> deleteFloorByNumber(Integer number) {
+        if (floorService.deleteFloorByNumber(number)) {
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Not Deleted", HttpStatus.NOT_FOUND);
+        }
     }
+
     @DeleteMapping("/deletefloor/bystreet")
-    public void deleteFloorByStreet(String street){
-        floorService.deleteFloorByStreet(street);
+    public ResponseEntity<String> deleteFloorByStreet(String street) {
+        if (floorService.deleteFloorByStreet(street)) {
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Not Deleted", HttpStatus.NOT_FOUND);
+        }
     }
+
     @DeleteMapping("/deletefloor/bystair")
-    public void deleteFloorByStair(Character stair){
-        floorService.deleteFloorByStair(stair);
+    public ResponseEntity<String> deleteFloorByStair(Character stair) {
+        if (floorService.deleteFloorByStair(stair)) {
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Not Deleted", HttpStatus.NOT_FOUND);
+        }
     }
+
     @DeleteMapping("/deletefloor/bylevel")
-    public void deleteFloorByLevel(Integer level){
-        floorService.deleteFloorByLevel(level);
+    public ResponseEntity<String> deleteFloorByLevel(Integer level) {
+        if (floorService.deleteFloorByLevel(level)) {
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Not Deleted", HttpStatus.NOT_FOUND);
+        }
     }
+
     @DeleteMapping("/deletefloor/bydoor")
-    public void deleteFloorByDoor(String door){
-        floorService.deleteFloorByDoor(door);
+    public ResponseEntity<String> deleteFloorByDoor(String door) {
+        if (floorService.deleteFloorByDoor(door)) {
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Not Deleted", HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/addfloor")
-    public Floor saveFloor(Floor floor){
-        return floorService.saveFloor(floor);
+    public ResponseEntity<Floor> saveFloor(Floor floor) {
+        return new ResponseEntity<>(floorService.saveFloor(floor), HttpStatus.CREATED);
     }
-    @PostMapping("/updatefloor")
-    public Floor updateFloor(Floor floor){
-        return floorService.updateFloor(floor);
+
+    @PutMapping("/updatefloor")
+    public ResponseEntity<String> updateFloor(Floor floor) {
+
+        if (floorService.updateFloor(floor)) {
+            return new ResponseEntity<>("Updated", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("Not Updated", HttpStatus.NOT_FOUND);
+        }
     }
 }

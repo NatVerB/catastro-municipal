@@ -3,6 +3,8 @@ package co.edu.unbosque.catastromunicipal.web.controller;
 import co.edu.unbosque.catastromunicipal.domain.UrbanZone;
 import co.edu.unbosque.catastromunicipal.domain.service.UrbanZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,23 +16,40 @@ public class UrbanZoneController {
     private UrbanZoneService urbanZoneService;
 
     @GetMapping("/allurbanzones")
-    public List<UrbanZone> getAllUrbanZones(){
-        return urbanZoneService.getAllUrbanZones();
+    public ResponseEntity<List<UrbanZone>> getAllUrbanZones() {
+        return new ResponseEntity<>(urbanZoneService.getAllUrbanZones(),HttpStatus.OK);
     }
+
     @GetMapping("/urbanzones/byname/{id}")
-    public List<UrbanZone> getUrbanZoneByName(@PathVariable("id") String name){
-        return urbanZoneService.getUrbanZoneByName(name);
+    public ResponseEntity<List<UrbanZone>> getUrbanZoneByName(@PathVariable("id") String name) {
+        return urbanZoneService.getUrbanZoneByName(name).map(urbanZones -> new ResponseEntity<>(urbanZones, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
     @DeleteMapping("/deleteurbanzone/byname")
-    public void deleteUrbanZoneByName(String name){
-        urbanZoneService.deleteUrbanZoneByName(name);
+    public ResponseEntity<String> deleteUrbanZoneByName(String name) {
+        if(urbanZoneService.deleteUrbanZoneByName(name)){
+            return new ResponseEntity<>("Deleted",HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("Not Deleted",HttpStatus.NOT_FOUND);
+        }
     }
+
     @PostMapping("/addurbanzone")
-    public  UrbanZone saveUrbanZone(UrbanZone urbanZone){
-        return urbanZoneService.saveUrbanZone(urbanZone);
+    public ResponseEntity<UrbanZone> saveUrbanZone(UrbanZone urbanZone) {
+        if(getUrbanZoneByName(urbanZone.getZoneName())==null){
+            return new ResponseEntity<>(urbanZoneService.saveUrbanZone(urbanZone), HttpStatus.CREATED) ;
+        }else{
+            return new ResponseEntity<>(null , HttpStatus.BAD_REQUEST) ;
+        }
+
     }
-    @PostMapping("/updateurbanzone")
-    public UrbanZone updateUrbanZone(UrbanZone urbanZone){
-        return urbanZoneService.updateUrbanZone(urbanZone);
+
+    @PutMapping("/updateurbanzone")
+    public ResponseEntity<String> updateUrbanZone(UrbanZone urbanZone) {
+        if (urbanZoneService.updateUrbanZone(urbanZone)) {
+            return new ResponseEntity<>("Updated",HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Not Updated",HttpStatus.NOT_MODIFIED);
+        }
     }
 }

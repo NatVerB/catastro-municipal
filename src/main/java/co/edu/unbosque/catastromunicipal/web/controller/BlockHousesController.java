@@ -4,6 +4,7 @@ import co.edu.unbosque.catastromunicipal.domain.BlockHouses;
 import co.edu.unbosque.catastromunicipal.domain.service.BlockHousesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +46,7 @@ public class BlockHousesController {
         if (blockHousesService.deleteBlockHousesByStreet(street)) {
             return new ResponseEntity<>("Deleted",HttpStatus.OK);
         }else{
-            return new ResponseEntity<>("Not Deleted", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not Deleted",HttpStatus.NOT_FOUND);
         }
     }
 

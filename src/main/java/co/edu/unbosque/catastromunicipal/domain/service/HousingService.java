@@ -5,7 +5,9 @@ import co.edu.unbosque.catastromunicipal.domain.repository.HousingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HousingService {
@@ -15,26 +17,39 @@ public class HousingService {
     public List<Housing> getAllHousings(){
         return housingRepository.getAllHousings();
     }
-    public List<Housing> getHousingByNumber(Integer number){
+
+    public Optional<List<Housing>> getHousingByNumber(Integer number) {
         return housingRepository.getHousingByNumber(number);
     }
-    public List<Housing> getHousingByStreet(String street){
+    public Optional<List<Housing>> getHousingByStreet(String street){
         return housingRepository.getHousingByStreet(street);
     }
-    public void deleteHousingByNumber(Integer number){
-        if(getHousingByNumber(number) != null){
+    public boolean deleteHousingByNumber(Integer number){
+        if(getHousingByNumber(number).isPresent()){
             housingRepository.deleteHousingByNumber(number);
+            return true;
+        }else{
+            return false;
         }
     }
-    public void deleteHousingByStreet(String street){
-        if(getHousingByStreet(street) != null){
+    public boolean deleteHousingByStreet(String street){
+        if(getHousingByStreet(street).isPresent()){
             housingRepository.deleteHousingByStreet(street);
+            return true;
+        }else{
+            return false;
         }
     }
     public Housing saveHousing(Housing housing){
         return housingRepository.saveHousing(housing);
     }
-    public Housing updateHousing(Housing housing){
-        return housingRepository.updateHousing(housing);
+    public boolean updateHousing(Housing housing){
+        if(getHousingByStreet(housing.getStreet()).isPresent()&&getHousingByNumber(housing.getNumber()).isPresent()){
+            housingRepository.updateHousing(housing);
+            return true;
+        }else{
+            return false;
+        }
     }
 }
+
