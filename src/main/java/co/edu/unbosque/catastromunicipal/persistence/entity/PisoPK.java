@@ -1,11 +1,14 @@
 package co.edu.unbosque.catastromunicipal.persistence.entity;
 
-import java.io.Serializable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 
+import java.io.Serializable;
+@Embeddable
 public class PisoPK implements Serializable {
     private Integer numero;
     private String calle;
-    private String escalera;
+    private Character escalera;
     private Integer planta;
     private String puerta;
 
@@ -25,11 +28,11 @@ public class PisoPK implements Serializable {
         this.calle = calle;
     }
 
-    public String getEscalera() {
+    public Character getEscalera() {
         return escalera;
     }
 
-    public void setEscalera(String escalera) {
+    public void setEscalera(Character escalera) {
         this.escalera = escalera;
     }
 

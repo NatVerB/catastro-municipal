@@ -1,24 +1,17 @@
 package co.edu.unbosque.catastromunicipal.persistence.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
 import java.io.Serializable;
 import java.util.Objects;
-
+@Embeddable
 public class CasaParticularPK implements Serializable {
-    public Integer numero;
-    public String calle;
+    private Integer numero;
+    private String calle;
 
-    @Override
-    public boolean equals(Object o) {
+    public CasaParticularPK() {
 
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CasaParticularPK that = (CasaParticularPK) o;
-        return numero == that.numero && Objects.equals(calle, that.calle);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numero, calle);
     }
 
     public Integer getNumero() {

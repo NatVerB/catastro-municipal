@@ -6,84 +6,97 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "Persona")
+@Table(name = "Persona", schema = "dbo")
 public class Persona {
 
     @Id
     @Column(name = "dni", length = 8, nullable = false)
     private Integer id;
     @Column(name = "nombre_persona", length = 20, nullable = false)
-    private String name;
+    private String nombre;
     @Column(name = "apellidos_persona", length = 40, nullable = false)
-    private String lastName;
+    private String apellido;
     @Column(name = "od_persona")
-    private Long additInfo;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "dni_c")
-    private Persona householdHeadId;
-    @OneToMany(mappedBy = "householdHeadId")
-    private List<Persona> householdMembers;
+    private String odPersona;
+    @Column(name = "dni_c")
+    private Integer dniC;
+    @Column(name = "calle")
+    private String calle;
+    @Column(name = "numero")
+    private Integer numero;
+
     @ManyToOne
-    @JoinColumn(name = "calle", referencedColumnName = "calle", insertable = false, updatable = false)
-    private Vivienda street;
+    @JoinColumn(name = "dni_c", referencedColumnName = "dni", insertable = false, updatable = false)
+    private Persona persona;
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Persona> personas;
+
     @ManyToOne
-    @JoinColumn(name = "numero", referencedColumnName = "numero", insertable = false, updatable = false)
-    private Vivienda houseNum;
+    @JoinColumns({
+            @JoinColumn(name = "calle", referencedColumnName = "calle", insertable = false, updatable = false),
+            @JoinColumn(name = "numero", referencedColumnName = "numero", insertable = false, updatable = false)
+    })
+    private Vivienda vivienda;
 
-    public Vivienda getHouseNum() {
-        return houseNum;
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CasaParticular> casaParticular;
+
+    public Integer getDniC() {
+        return dniC;
     }
 
-    public void setHouseNum(Vivienda houseNum) {
-        this.houseNum = houseNum;
+    public void setDniC(Integer dniC) {
+        this.dniC = dniC;
     }
 
-    public Vivienda getStreet() {
-        return street;
+    public String getCalle() {
+        return calle;
     }
 
-    public void setStreet(Vivienda street) {
-        this.street = street;
+    public void setCalle(String calle) {
+        this.calle = calle;
     }
 
-    public List<Persona> getHouseholdMembers() {
-        return householdMembers;
+    public Integer getNumero() {
+        return numero;
     }
 
-    public void setHouseholdMembers(List<Persona> householdMembers) {
-        this.householdMembers = householdMembers;
+    public void setNumero(Integer numero) {
+        this.numero = numero;
     }
 
-    public Persona getHouseholdHeadId() {
-        return householdHeadId;
+    public Vivienda getVivienda() {
+        return vivienda;
     }
 
-    public void setHouseholdHeadId(Persona householdHeadId) {
-        this.householdHeadId = householdHeadId;
+    public void setVivienda(Vivienda vivienda) {
+        this.vivienda = vivienda;
     }
 
-    public Long getAdditInfo() {
-        return additInfo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setAdditInfo(Long additInfo) {
-        this.additInfo = additInfo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public String getName() {
-        return name;
+    public String getOdPersona() {
+        return odPersona;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOdPersona(String odPersona) {
+        this.odPersona = odPersona;
     }
 
     public Integer getId() {
@@ -92,5 +105,29 @@ public class Persona {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<CasaParticular> getCasaParticular() {
+        return casaParticular;
+    }
+
+    public void setCasaParticular(List<CasaParticular> casaParticular) {
+        this.casaParticular = casaParticular;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public List<Persona> getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(List<Persona> personas) {
+        this.personas = personas;
     }
 }

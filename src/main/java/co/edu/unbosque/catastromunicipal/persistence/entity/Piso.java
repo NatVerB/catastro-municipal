@@ -3,32 +3,89 @@ package co.edu.unbosque.catastromunicipal.persistence.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Piso")
-@IdClass(PisoPK.class)
+@Table(name = "Piso", schema = "dbo")
 public class Piso {
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "calle", referencedColumnName = "calle", updatable = false, insertable = false)
-    private BloqueCasas calle;
+    @EmbeddedId
+    private PisoPK id;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "numero", referencedColumnName = "numero", updatable = false, insertable = false)
-    private  BloqueCasas numero;
+    @Column(name = "metros_p")
+    private Integer metrosP;
 
-    @Id
-    @Column(name = "escalera")
-    private String escalera;
+    @Column(name = "od_piso")
+    private String odPiso;
 
-    @Id
-    @Column(name = "planta")
-    private Integer plantaPiso;
+    @Column(name = "dni_p")
+    private Integer dniP;
 
-    @Id
-    @Column(name = "puerta")
-    private String puerta;
 
     @ManyToOne
-    @JoinColumn(name = "dni_p", referencedColumnName = "dni")
+    @JoinColumns({
+            @JoinColumn(name = "calle", referencedColumnName = "calle", updatable = false, insertable = false),
+            @JoinColumn(name = "numero", referencedColumnName = "numero", updatable = false, insertable = false)
+    })
+    private BloqueCasas bloqueCasas;
+
+    @ManyToOne
+    @JoinColumn(name = "dni_p", referencedColumnName = "dni", insertable = false, updatable = false)
     private Persona persona;
+
+    @OneToOne(mappedBy = "piso", cascade =  CascadeType.ALL, orphanRemoval = true)
+    private HabitaPiso habitaPiso;
+
+
+    public PisoPK getId() {
+        return id;
+    }
+
+    public Integer getMetrosP() {
+        return metrosP;
+    }
+
+    public void setMetrosP(Integer metrosP) {
+        this.metrosP = metrosP;
+    }
+
+    public String getOdPiso() {
+        return odPiso;
+    }
+
+    public void setOdPiso(String odPiso) {
+        this.odPiso = odPiso;
+    }
+
+    public BloqueCasas getBloqueCasas() {
+        return bloqueCasas;
+    }
+
+    public void setBloqueCasas(BloqueCasas bloqueCasas) {
+        this.bloqueCasas = bloqueCasas;
+    }
+
+    public HabitaPiso getHabitaPiso() {
+        return habitaPiso;
+    }
+
+    public void setHabitaPiso(HabitaPiso habitaPiso) {
+        this.habitaPiso = habitaPiso;
+    }
+
+    public void setId(PisoPK id) {
+        this.id = id;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public Integer getDniP() {
+        return dniP;
+    }
+
+    public void setDniP(Integer dniP) {
+        this.dniP = dniP;
+    }
 }

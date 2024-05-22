@@ -10,10 +10,16 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public interface PisoCrudRepository extends CrudRepository<Piso, PisoPK> {
-    public Iterable<Piso> findAll();
-    public List<Piso> findAllByCalleAndNumero(BloqueCasas calle, BloqueCasas numero);
-    public List<Piso> findAllByCalleAndNumeroAndEscalera(BloqueCasas calle, BloqueCasas numero, String escalera);
-    public List<Piso> findAllByCalleAndNumeroAndPlantaPiso(BloqueCasas calle, BloqueCasas numero, Integer plantaPiso);
-    public List<Piso> findAllByPersona(Persona persona);
-    public List<Piso> findByCalleAndNumeroAndEscaleraAndPlantaPisoAndPuerta(BloqueCasas calle, BloqueCasas numero, String escalera, Integer plantaPiso, String puerta);
+    public Piso getById_Numero(Integer id);
+    public Piso getById_Calle(String id);
+    public Piso getById_Escalera(Character id);
+    public Piso getById_Planta(Integer id);
+    public Piso getById_Puerta(String id);
+    Piso findById_NumeroAndId_CalleAndId_EscaleraAndId_PlantaAndId_Puerta(Integer numero, String calle, Character escalera, Integer level, String door);
+    void deleteById_Numero(Integer id);
+    void deleteById_Calle(String id);
+    void deleteById_Escalera(Character id);
+    void deleteById_Planta(Integer id);
+    void deleteById_Puerta(String id);
+
 }

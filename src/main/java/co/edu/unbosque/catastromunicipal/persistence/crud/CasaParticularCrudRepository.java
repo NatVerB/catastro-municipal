@@ -8,10 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public interface CasaParticularCrudRepository extends CrudRepository<CasaParticular, CasaParticularPK> {
-    public List<CasaParticular> findByCalle(String calle);
-    public List<CasaParticular> findByNumero(Integer numero);
-    public void deleteByCalle(String calle);
-    public void deleteByNumero(Integer numero);
-    public void getByCalle(String calle);
-    public void getByNumero(Integer numero);
+    CasaParticular findById_Calle(String calle);
+    CasaParticular findById_Numero(Integer numero);
+    CasaParticular findById_NumeroAndId_Calle(Integer numero, String calle);
+    List<CasaParticular> getById_Calle(String calle);
+    CasaParticular getById_Numero(Integer numero);
 }

@@ -2,17 +2,16 @@ package co.edu.unbosque.catastromunicipal.persistence.entity;
 
 import jakarta.persistence.*;
 
-@Entity
-@IdClass(ViviendaPK.class)
-public class Vivienda {
-    @Id
-    private Integer numero;
+import java.util.List;
 
-    @Id
-    private String calle;
+@Entity
+@Table(name= "Vivienda", schema = "dbo")
+public class Vivienda {
+    @EmbeddedId
+    private ViviendaPK id;
 
     @Column(name = "tipo_vivienda", length = 1)
-    private String tipo;
+    private Character tipo;
 
     @Column(name = "codigo_postal", length = 5)
     private Integer codigoPostal;
@@ -21,34 +20,80 @@ public class Vivienda {
     private Integer metrosCuadrados;
 
     @Column(name = "od_vivienda")
-    private String OdVivienda;
+    private String odVivienda;
 
+    @Column(name = "nombre_zona")
+    private String nombreZona;
+
+
+
+    //Relaciones
+    //Relacion con zona urbana
     @ManyToOne
-    @JoinColumn(name = "nombre_zona", referencedColumnName = "nombre_zona")
-    private ZonaUrbana zona;
+    @JoinColumn(name = "nombre_zona", referencedColumnName = "nombre_zona", insertable = false, updatable = false)
+    private ZonaUrbana zonaUrbana;
 
-    public Integer getNumero() {
-        return numero;
+    //Relacion con bloque casas
+    @OneToOne(mappedBy = "vivienda", cascade = CascadeType.ALL, orphanRemoval = true)
+    private BloqueCasas bloqueCasas;
+
+    @OneToOne(mappedBy = "vivienda", cascade = CascadeType.ALL, orphanRemoval = true)
+    private CasaParticular casaParticular;
+
+    @OneToMany(mappedBy = "vivienda", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Persona> personas;
+
+
+// Getters y setters
+
+
+    public String getNombreZona() {
+        return nombreZona;
     }
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public void setNombreZona(String nombreZona) {
+        this.nombreZona = nombreZona;
     }
 
-    public String getCalle() {
-        return calle;
+    public ViviendaPK getId() {
+        return id;
     }
 
-    public void setCalle(String calle) {
-        this.calle = calle;
+    public void setId(ViviendaPK id) {
+        this.id = id;
     }
 
-    public String getTipo() {
+    public BloqueCasas getBloqueCasas() {
+        return bloqueCasas;
+    }
+
+    public void setBloqueCasas(BloqueCasas bloqueCasas) {
+        this.bloqueCasas = bloqueCasas;
+    }
+
+    public CasaParticular getCasaParticular() {
+        return casaParticular;
+    }
+
+    public void setCasaParticular(CasaParticular casaParticular) {
+        this.casaParticular = casaParticular;
+    }
+
+    public Character getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(Character tipo) {
         this.tipo = tipo;
+    }
+
+
+    public List<Persona> getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(List<Persona> personas) {
+        this.personas = personas;
     }
 
     public Integer getCodigoPostal() {
@@ -68,18 +113,18 @@ public class Vivienda {
     }
 
     public String getOdVivienda() {
-        return OdVivienda;
+        return odVivienda;
     }
 
     public void setOdVivienda(String odVivienda) {
-        OdVivienda = odVivienda;
+        this.odVivienda = odVivienda;
     }
 
-    public ZonaUrbana getZona() {
-        return zona;
+    public ZonaUrbana getZonaUrbana() {
+        return zonaUrbana;
     }
 
-    public void setZona(ZonaUrbana zona) {
-        this.zona = zona;
+    public void setZonaUrbana(ZonaUrbana zonaUrbana) {
+        this.zonaUrbana = zonaUrbana;
     }
 }
