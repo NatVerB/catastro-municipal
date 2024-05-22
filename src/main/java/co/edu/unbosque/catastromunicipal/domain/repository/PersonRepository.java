@@ -10,5 +10,5 @@ public interface PersonRepository {
     List<Person> getAllPersons();
     Optional<Person> getById(Integer id);
     void deleteById(Integer id);
-    Person update(Person person);
+    void update(Integer dni, String odHouse);
 }

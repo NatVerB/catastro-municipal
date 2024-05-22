@@ -18,7 +18,8 @@ public interface FloorMapper {
             @Mapping(source = "id.planta", target = "level"),
             @Mapping(source = "id.puerta", target = "door"),
             @Mapping(source = "metrosP", target = "meters"),
-            @Mapping(source = "odPiso", target = "floorOd")
+            @Mapping(source = "odPiso", target = "floorOd"),
+            @Mapping(source = "dniP", target = "dniP")
     })
     Floor toFloor(Piso piso);
     List<Floor> toFloors(List<Piso> pisos);

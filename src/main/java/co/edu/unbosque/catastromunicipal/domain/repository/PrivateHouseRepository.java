@@ -9,8 +9,7 @@ public interface PrivateHouseRepository {
     List<PrivateHouse> getAllPrivateHouses();
     Optional<PrivateHouse> getPrivateHousesByNumber(Integer number);
     Optional<PrivateHouse> getPrivateHousesByStreet(String street);
-    void deletePrivateHouseByNumber(Integer number);
-    void deletePrivateHouseByStreet(String street);
+    void deletePrivateHouse(Integer number, String street);
     PrivateHouse savePrivateHouse(PrivateHouse privateHouse);
     void updatePrivateHouse(Integer number, String street, String odHouse);
 }

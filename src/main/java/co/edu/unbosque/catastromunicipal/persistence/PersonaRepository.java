@@ -43,12 +43,11 @@ public class PersonaRepository implements PersonRepository {
     }
 
     @Override
-    public Person update(Person person) {
-        Persona persona = mapper.toPersona(person);
-        if (persona.getId() != null && personaCrudRepository.existsById(persona.getId())) {
-            return mapper.toPerson(personaCrudRepository.save(persona));
-        } else {
-            throw new RuntimeException("No se puede actualizar Persona porque no existe en la base de datos.");
+    public void update(Integer dni, String odPersona) {
+        Persona persona = personaCrudRepository.findPersonaById(dni);
+        if (persona != null) {
+            persona.setOdPersona(odPersona);
+            personaCrudRepository.save(persona);
         }
     }
 }

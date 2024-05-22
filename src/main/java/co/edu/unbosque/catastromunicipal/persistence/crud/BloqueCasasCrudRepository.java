@@ -8,6 +8,7 @@ import java.util.List;
 public interface BloqueCasasCrudRepository extends CrudRepository<BloqueCasas, BloqueCasasPK> {
     BloqueCasas findById_Numero(Integer numero);
     BloqueCasas findById_Calle(String calle);
+    BloqueCasas findById_CalleAndId_Numero(String calle, Integer numero);
     void deleteById_Calle(String calle);
     void deleteById_Numero(Integer calle);
 }

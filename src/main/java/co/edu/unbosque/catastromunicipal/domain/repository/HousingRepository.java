@@ -9,8 +9,7 @@ public interface HousingRepository {
     List<Housing> getAllHousings();
     Optional<List<Housing>> getHousingByNumber(Integer number);
     Optional<List<Housing>> getHousingByStreet(String street);
-    void deleteHousingByNumber(Integer number);
-    void deleteHousingByStreet(String street);
+    void deleteHousing(Integer number,String street);
     Housing saveHousing(Housing housing);
     Housing updateHousing(Housing housing);
 }

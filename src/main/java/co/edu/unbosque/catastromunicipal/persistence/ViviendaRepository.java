@@ -38,14 +38,13 @@ public class ViviendaRepository implements HousingRepository {
     }
 
     @Override
-    public void deleteHousingByNumber(Integer number) {
-        viviendaCrudRepository.deleteById_Numero(number);
+    public void deleteHousing(Integer number, String street) {
+        Vivienda vivienda = viviendaCrudRepository.findById_NumeroAndId_Calle(number, street);
+        if(vivienda != null){
+            viviendaCrudRepository.delete(vivienda);
+        }
     }
 
-    @Override
-    public void deleteHousingByStreet(String street) {
-        viviendaCrudRepository.deleteById_Calle(street);
-    }
 
     @Override
     public Housing saveHousing(Housing housing) {

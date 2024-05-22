@@ -25,18 +25,9 @@ public class BlockHousesService {
     public Optional<BlockHouses> getBlockHousesByNumber(Integer number) {
         return blockHousesRepository.getBlockHousesByNumber(number);
     }
-    public boolean deleteBlockHousesByNumber(Integer number){
-        if(getBlockHousesByNumber(number).isPresent()){
-            blockHousesRepository.deleteBlockHousesByNumber(number);
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public boolean deleteBlockHousesByStreet(String street){
-        if(blockHousesRepository.getBlockHousesByStreet(street).isPresent()){
-            blockHousesRepository.deleteBlockHousesByStreet(street);
+    public boolean deleteBlockHouse(Integer number, String street){
+        if(getBlockHousesByNumber(number).isPresent()&& getBlockHousesByStreet(street).isPresent()){
+            blockHousesRepository.deleteBlockHouse(number, street);
             return true;
         }else{
             return false;

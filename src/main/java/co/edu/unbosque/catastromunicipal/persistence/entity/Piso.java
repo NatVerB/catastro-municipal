@@ -14,6 +14,9 @@ public class Piso {
     @Column(name = "od_piso")
     private String odPiso;
 
+    @Column(name = "dni_p")
+    private Integer dniP;
+
 
     @ManyToOne
     @JoinColumns({
@@ -78,5 +81,11 @@ public class Piso {
         this.persona = persona;
     }
 
+    public Integer getDniP() {
+        return dniP;
+    }
 
+    public void setDniP(Integer dniP) {
+        this.dniP = dniP;
+    }
 }

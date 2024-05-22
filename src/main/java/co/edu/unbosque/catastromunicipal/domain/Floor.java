@@ -9,6 +9,7 @@ public class Floor {
 
     private Integer meters;
     private String floorOd;
+    private Integer dniP;
 
 
     public Integer getNumber() {
@@ -65,5 +66,13 @@ public class Floor {
 
     public void setFloorOd(String floorOd) {
         this.floorOd = floorOd;
+    }
+
+    public Integer getDniP() {
+        return dniP;
+    }
+
+    public void setDniP(Integer dniP) {
+        this.dniP = dniP;
     }
 }

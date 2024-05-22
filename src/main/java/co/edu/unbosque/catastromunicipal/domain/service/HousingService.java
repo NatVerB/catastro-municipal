@@ -24,22 +24,15 @@ public class HousingService {
     public Optional<List<Housing>> getHousingByStreet(String street){
         return housingRepository.getHousingByStreet(street);
     }
-    public boolean deleteHousingByNumber(Integer number){
-        if(getHousingByNumber(number).isPresent()){
-            housingRepository.deleteHousingByNumber(number);
+    public boolean deleteHousing(Integer number, String street){
+        if(getHousingByNumber(number).isPresent()&& getHousingByStreet(street).isPresent()){
+            housingRepository.deleteHousing(number, street);
             return true;
         }else{
             return false;
         }
     }
-    public boolean deleteHousingByStreet(String street){
-        if(getHousingByStreet(street).isPresent()){
-            housingRepository.deleteHousingByStreet(street);
-            return true;
-        }else{
-            return false;
-        }
-    }
+
     public Housing saveHousing(Housing housing){
         return housingRepository.saveHousing(housing);
     }

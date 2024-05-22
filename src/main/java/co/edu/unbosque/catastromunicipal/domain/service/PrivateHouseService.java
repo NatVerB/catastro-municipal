@@ -23,22 +23,15 @@ public class PrivateHouseService {
     public Optional<PrivateHouse> getPrivateHousesByStreet(String street){
         return privateHouseRepository.getPrivateHousesByStreet(street);
     }
-    public boolean deletePrivateHouseByNumber(Integer number){
-        if(getPrivateHousesByNumber(number).isPresent()){
-            privateHouseRepository.deletePrivateHouseByNumber(number);
+    public boolean deletePrivateHouse(Integer number, String street){
+        if(getPrivateHousesByNumber(number).isPresent()&& getPrivateHousesByStreet(street).isPresent()){
+            privateHouseRepository.deletePrivateHouse(number, street);
             return true;
         }else {
             return false;
         }
     }
-    public boolean deletePrivateHouseByStreet(String street){
-        if(getPrivateHousesByStreet(street).isPresent()){
-            privateHouseRepository.deletePrivateHouseByStreet(street);
-            return true;
-        }else{
-            return false;
-        }
-    }
+
     public PrivateHouse savePrivateHouse(PrivateHouse privateHouse){
         return privateHouseRepository.savePrivateHouse(privateHouse);
     }

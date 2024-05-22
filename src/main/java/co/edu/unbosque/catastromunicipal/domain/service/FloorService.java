@@ -17,67 +17,31 @@ public class FloorService {
         return floorRepository.getAllFloors();
     }
 
-    public Optional<List<Floor>> getFloorsByNumber(Integer number) {
+    public Optional<Floor> getFloorsByNumber(Integer number) {
         return floorRepository.getFloorsByNumber(number);
     }
 
-    public Optional<List<Floor>> getFloorsByStreet(String street) {
+    public Optional<Floor> getFloorsByStreet(String street) {
         return floorRepository.getFloorsByStreet(street);
     }
 
-    public Optional<List<Floor>> getFloorsByStair(Character stair) {
+    public Optional<Floor> getFloorsByStair(Character stair) {
         return floorRepository.getFloorsByStair(stair);
     }
 
-    public Optional<List<Floor>> getFloorsByLevel(Integer level) {
+    public Optional<Floor> getFloorsByLevel(Integer level) {
         return floorRepository.getFloorsByLevel(level);
     }
 
-    public Optional<List<Floor>> getFloorsByDoor(String door) {
+    public Optional<Floor> getFloorsByDoor(String door) {
         return floorRepository.getFloorsByDoor(door);
     }
 
-    public boolean deleteFloorByNumber(Integer number) {
+    public boolean deleteFloor(Integer number, String street, Character stair, Integer level, String door) {
         if (getFloorsByNumber(number).isPresent()) {
-            floorRepository.deleteFloorByNumber(number);
+            floorRepository.deleteFloor(number, street, stair, level, door);
             return true;
-        }else{
-            return false;
-        }
-    }
-
-    public boolean deleteFloorByStreet(String street) {
-        if (getFloorsByStreet(street).isPresent()) {
-            floorRepository.deleteFloorByStreet(street);
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public boolean deleteFloorByStair(Character stair) {
-        if (getFloorsByStair(stair).isPresent()) {
-            floorRepository.deleteFloorByStair(stair);
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public boolean deleteFloorByLevel(Integer level) {
-        if (getFloorsByLevel(level).isPresent()) {
-            floorRepository.deleteFloorByLevel(level);
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public boolean deleteFloorByDoor(String door) {
-        if (getFloorsByDoor(door).isPresent()) {
-            floorRepository.deleteFloorByDoor(door);
-            return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -86,11 +50,11 @@ public class FloorService {
         return floorRepository.saveFloor(floor);
     }
 
-    public boolean updateFloor(Floor floor) {
-        if (getFloorsByStreet(floor.getStreet()).isPresent() && getFloorsByDoor(floor.getDoor()).isPresent() && getFloorsByNumber(floor.getNumber()).isPresent() && getFloorsByLevel(floor.getLevel()).isPresent()&& getFloorsByStair(floor.getStair()).isPresent()) {
-            floorRepository.updateFloor(floor);
+    public boolean updateFloor(Integer number, String street, Integer meters, String odFloor) {
+        if (getFloorsByNumber(number).isPresent()) {
+            floorRepository.updateFloor(number, street, meters, odFloor);
             return true;
-        }else{
+        } else {
             return false;
         }
     }

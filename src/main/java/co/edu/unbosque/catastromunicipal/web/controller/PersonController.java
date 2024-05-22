@@ -41,9 +41,9 @@ public class PersonController {
     }
 
     @PutMapping("/updateperson")
-    public ResponseEntity<String> update(Person person){
+    public ResponseEntity<String> update(Integer id, String odPerson){
 
-        if(personService.update(person)){
+        if(personService.update(id, odPerson)){
             return new ResponseEntity<>("Person updated", HttpStatus.OK);
         }else{
             return new ResponseEntity<>("Person not updated", HttpStatus.NOT_FOUND);

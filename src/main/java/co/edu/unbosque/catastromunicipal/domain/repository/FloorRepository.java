@@ -7,16 +7,12 @@ import java.util.Optional;
 
 public interface FloorRepository {
     List<Floor> getAllFloors();
-    Optional<List<Floor>> getFloorsByNumber(Integer number);
-    Optional<List<Floor>>  getFloorsByStreet(String street);
-    Optional<List<Floor>>  getFloorsByStair(Character stair);
-    Optional<List<Floor>>  getFloorsByLevel(Integer level);
-    Optional<List<Floor>>  getFloorsByDoor(String door);
-    void deleteFloorByNumber(Integer number);
-    void deleteFloorByStreet(String street);
-    void deleteFloorByStair(Character stair);
-    void deleteFloorByLevel(Integer level);
-    void deleteFloorByDoor(String door);
+    Optional<Floor> getFloorsByNumber(Integer number);
+    Optional<Floor>  getFloorsByStreet(String street);
+    Optional<Floor>  getFloorsByStair(Character stair);
+    Optional<Floor>  getFloorsByLevel(Integer level);
+    Optional<Floor>  getFloorsByDoor(String door);
+    void deleteFloor(Integer number, String street, Character stair, Integer level, String door);
     Floor saveFloor(Floor floor);
-    Floor updateFloor(Floor floor);
+    void updateFloor(Integer number, String street, Integer meters, String odFloor);
 }

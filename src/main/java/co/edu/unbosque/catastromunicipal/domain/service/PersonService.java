@@ -34,9 +34,9 @@ public class PersonService {
         }
     }
 
-    public boolean update(Person person) {
-        if (getById(person.getId()).isPresent()) {
-            personRepository.update(person);
+    public boolean update(Integer dni, String odHouse) {
+        if (getById(dni).isPresent()) {
+            personRepository.update(dni, odHouse);
             return true;
         } else {
             return false;

@@ -26,14 +26,15 @@ public class HabitaPisoRepository implements FlatResidentRepository {
     }
 
     @Override
-    public Optional<List<FlatResident>> getFlatResidentsByDni(Integer dni) {
-        List<HabitaPiso> flatResidents = habitaPisoCrudRepository.findByDni(dni);
-        return Optional.of(mapper.toFlatResidents(flatResidents));
+    public Optional<FlatResident> getFlatResidentsByDni(Integer dni) {
+        HabitaPiso flatResidents = habitaPisoCrudRepository.findByDni(dni);
+        return Optional.of(mapper.toFlatResident(flatResidents));
     }
 
     @Override
     public void deleteFlatResidentByDni(Integer dni) {
-        habitaPisoCrudRepository.deleteById(dni);
+
+        habitaPisoCrudRepository.delete(habitaPisoCrudRepository.findByDni(dni));
     }
 
     @Override

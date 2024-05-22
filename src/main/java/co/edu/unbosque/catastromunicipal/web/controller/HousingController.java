@@ -32,24 +32,15 @@ public class HousingController {
         return housingService.getHousingByStreet(street).map(housings -> new ResponseEntity<>(housings, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/deletehousing/bynumber")
-    public ResponseEntity<String> deleteHousingByNumber(Integer number) {
-        if (housingService.deleteHousingByNumber(number)) {
+    @DeleteMapping("/deletehousing")
+    public ResponseEntity<String> deleteHousing(Integer number, String street) {
+        if (housingService.deleteHousing(number, street)) {
             return new ResponseEntity<>("Housing delete", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Housing not delete", HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/deletehousing/bystreet")
-    public ResponseEntity<String> deleteHousingByStreet(String street) {
-        if (housingService.getHousingByStreet(street).isPresent()) {
-            housingService.deleteHousingByStreet(street);
-            return new ResponseEntity<>("Housing delete", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Housing not delete", HttpStatus.NOT_FOUND);
-        }
-    }
 
     @PostMapping("/addhousing")
     public ResponseEntity<Housing> saveHousing(Housing housing) {

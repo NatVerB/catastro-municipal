@@ -17,7 +17,7 @@ public class FlatResidentService {
         return flatResidentRepository.getAllFlatResidents();
     }
 
-    public Optional<List<FlatResident>> getFlatResidentsByDni(Integer dni) {
+    public Optional<FlatResident> getFlatResidentsByDni(Integer dni) {
         return flatResidentRepository.getFlatResidentsByDni(dni);
     }
 

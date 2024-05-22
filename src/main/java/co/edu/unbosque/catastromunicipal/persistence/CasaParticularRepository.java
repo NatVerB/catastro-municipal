@@ -36,13 +36,8 @@ public class CasaParticularRepository implements PrivateHouseRepository {
     }
 
     @Override
-    public void deletePrivateHouseByNumber(Integer number) {
-        casaParticularCrudRepository.deleteById_Numero(number);
-    }
-
-    @Override
-    public void deletePrivateHouseByStreet(String street) {
-        casaParticularCrudRepository.deleteById_Calle(street);
+    public void deletePrivateHouse(Integer number, String street) {
+        casaParticularCrudRepository.delete(casaParticularCrudRepository.findById_NumeroAndId_Calle(number, street));
     }
 
     @Override

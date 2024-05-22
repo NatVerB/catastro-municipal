@@ -38,14 +38,10 @@ public class BloqueCasasRepository implements BlockHousesRepository {
     }
 
     @Override
-    public void deleteBlockHousesByNumber(Integer number){
-        bloqueCasasCrudRepository.delete(bloqueCasasCrudRepository.findById_Numero(number));
+    public void deleteBlockHouse(Integer number, String street) {
+        bloqueCasasCrudRepository.delete(bloqueCasasCrudRepository.findById_CalleAndId_Numero(street, number));
     }
 
-    @Override
-    public void deleteBlockHousesByStreet(String street){
-        bloqueCasasCrudRepository.delete(bloqueCasasCrudRepository.findById_Calle(street));
-    }
 
     @Override
     public BlockHouses saveBlockHouses (BlockHouses bloque){

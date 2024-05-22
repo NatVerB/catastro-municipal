@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/floor")
@@ -24,69 +25,33 @@ public class FloorController {
     }
 
     @GetMapping("/floor/bynumber/{id}")
-    public ResponseEntity<List<Floor>> getFloorsByNumber(@PathVariable("id") Integer number) {
+    public ResponseEntity<Floor> getFloorsByNumber(@PathVariable("id") Integer number) {
         return floorService.getFloorsByNumber(number).map(floors -> new ResponseEntity<>(floors, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/floor/bystreet/{id}")
-    public ResponseEntity<List<Floor>> getFloorsByStreet(@PathVariable("id") String street) {
+    public ResponseEntity<Floor> getFloorsByStreet(@PathVariable("id") String street) {
         return floorService.getFloorsByStreet(street).map(floors -> new ResponseEntity<>(floors, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/floor/bystair/{id}")
-    public ResponseEntity<List<Floor>> getFloorsByStair(@PathVariable("id") Character stair) {
+    public ResponseEntity<Floor> getFloorsByStair(@PathVariable("id") Character stair) {
         return floorService.getFloorsByStair(stair).map(floors -> new ResponseEntity<>(floors, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/floor/bylevel/{id}")
-    public ResponseEntity<List<Floor>> getFloorsByLevel(@PathVariable("id") Integer level) {
+    public ResponseEntity<Floor> getFloorsByLevel(@PathVariable("id") Integer level) {
         return floorService.getFloorsByLevel(level).map(floors -> new ResponseEntity<>(floors, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/floor/bydoor/{id}")
-    public ResponseEntity<List<Floor>> getFloorsByDoor(@PathVariable("id") String door) {
+    public ResponseEntity<Floor> getFloorsByDoor(@PathVariable("id") String door) {
         return floorService.getFloorsByDoor(door).map(floors -> new ResponseEntity<>(floors, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/deletefloor/bynumber")
-    public ResponseEntity<String> deleteFloorByNumber(Integer number) {
-        if (floorService.deleteFloorByNumber(number)) {
-            return new ResponseEntity<>("Deleted", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Not Deleted", HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @DeleteMapping("/deletefloor/bystreet")
-    public ResponseEntity<String> deleteFloorByStreet(String street) {
-        if (floorService.deleteFloorByStreet(street)) {
-            return new ResponseEntity<>("Deleted", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Not Deleted", HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @DeleteMapping("/deletefloor/bystair")
-    public ResponseEntity<String> deleteFloorByStair(Character stair) {
-        if (floorService.deleteFloorByStair(stair)) {
-            return new ResponseEntity<>("Deleted", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Not Deleted", HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @DeleteMapping("/deletefloor/bylevel")
-    public ResponseEntity<String> deleteFloorByLevel(Integer level) {
-        if (floorService.deleteFloorByLevel(level)) {
-            return new ResponseEntity<>("Deleted", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Not Deleted", HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @DeleteMapping("/deletefloor/bydoor")
-    public ResponseEntity<String> deleteFloorByDoor(String door) {
-        if (floorService.deleteFloorByDoor(door)) {
+    public ResponseEntity<String> deleteFloor(Integer number, String street, Character stair, Integer level, String door) {
+        if (floorService.deleteFloor(number, street, stair , level, door)) {
             return new ResponseEntity<>("Deleted", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Not Deleted", HttpStatus.NOT_FOUND);
@@ -99,9 +64,9 @@ public class FloorController {
     }
 
     @PutMapping("/updatefloor")
-    public ResponseEntity<String> updateFloor(Floor floor) {
+    public ResponseEntity<String> updateFloor(Integer number, String street, Integer meters, String odFloor) {
 
-        if (floorService.updateFloor(floor)) {
+        if (floorService.updateFloor(number, street, meters, odFloor)) {
             return new ResponseEntity<>("Updated", HttpStatus.OK);
         }else{
             return new ResponseEntity<>("Not Updated", HttpStatus.NOT_FOUND);

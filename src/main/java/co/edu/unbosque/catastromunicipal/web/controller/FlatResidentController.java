@@ -24,7 +24,7 @@ public class FlatResidentController {
     }
 
     @GetMapping("/flatresidents/bydni/{id}")
-    public ResponseEntity<List<FlatResident>> getFlatResidentsByDni(@PathVariable("id") Integer dni){
+    public ResponseEntity<FlatResident> getFlatResidentsByDni(@PathVariable("id") Integer dni){
         return flatResidentService.getFlatResidentsByDni(dni).map(flats -> new ResponseEntity<>(flats, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 

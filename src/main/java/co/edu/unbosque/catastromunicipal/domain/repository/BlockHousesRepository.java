@@ -9,8 +9,7 @@ public interface BlockHousesRepository {
     List<BlockHouses> getAllBlockHouses();
     Optional<BlockHouses> getBlockHousesByStreet(String street);
     Optional<BlockHouses>  getBlockHousesByNumber(Integer number);
-    void deleteBlockHousesByNumber(Integer number);
-    void deleteBlockHousesByStreet(String street);
+    void deleteBlockHouse(Integer number, String street);
     BlockHouses saveBlockHouses(BlockHouses blockHouses);
     void updateBlockHouses(Integer number, String street, String odHouse );
 }

@@ -34,23 +34,15 @@ public class BlockHousesController {
         return blockHousesService.getBlockHousesByNumber(number).map(blockHousesList -> new ResponseEntity<>(blockHousesList, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/deleteblockhouse/bynumber")
-    public ResponseEntity<String> deleteBlockHousesByNumber(Integer number) {
-        if (blockHousesService.deleteBlockHousesByNumber(number)) {
+    @DeleteMapping("/deleteblockhouse")
+    public ResponseEntity<String> deleteBlockHouse(Integer number, String street) {
+        if (blockHousesService.deleteBlockHouse(number, street)) {
             return new ResponseEntity<>("Deleted",HttpStatus.OK);
         }else{
             return new ResponseEntity<>("Not Deleted",HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("deleteblockhouse/bystreet")
-    public ResponseEntity<String> deleteBlockHousesByStreet(String street) {
-        if (blockHousesService.deleteBlockHousesByStreet(street)) {
-            return new ResponseEntity<>("Deleted",HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>("Not Deleted",HttpStatus.NOT_FOUND);
-        }
-    }
 
     @PostMapping("/addblockhouse")
     public ResponseEntity<BlockHouses> saveBlockHouses(BlockHouses blockHouses) {

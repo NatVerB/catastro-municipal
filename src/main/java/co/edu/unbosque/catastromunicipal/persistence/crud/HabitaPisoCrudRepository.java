@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HabitaPisoCrudRepository extends CrudRepository<HabitaPiso, Integer> {
-    public List<HabitaPiso> findByDni(Integer id);
+    public HabitaPiso findByDni(Integer id);
     public void deleteByDni(Integer id);
 }

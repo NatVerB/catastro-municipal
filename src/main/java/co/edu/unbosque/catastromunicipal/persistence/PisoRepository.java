@@ -26,58 +26,39 @@ public class PisoRepository implements FloorRepository {
     }
 
     @Override
-    public Optional<List<Floor>> getFloorsByNumber(Integer number) {
-        List<Piso> floors = pisoCrudRepository.getById_Numero(number);
-        return Optional.of(mapper.toFloors(floors));
+    public Optional<Floor> getFloorsByNumber(Integer number) {
+        Piso floors = pisoCrudRepository.getById_Numero(number);
+        return Optional.of(mapper.toFloor(floors));
     }
 
     @Override
-    public Optional<List<Floor>> getFloorsByStreet(String street) {
-        List<Piso> floors = pisoCrudRepository.getById_Calle(street);
-        return Optional.of(mapper.toFloors(floors));
+    public Optional<Floor> getFloorsByStreet(String street) {
+        Piso floors = pisoCrudRepository.getById_Calle(street);
+        return Optional.of(mapper.toFloor(floors));
     }
 
     @Override
-    public Optional<List<Floor>> getFloorsByStair(Character stair) {
-        List<Piso> floors = pisoCrudRepository.getById_Escalera(stair);
-        return Optional.of(mapper.toFloors(floors));
+    public Optional<Floor> getFloorsByStair(Character stair) {
+        Piso floors = pisoCrudRepository.getById_Escalera(stair);
+        return Optional.of(mapper.toFloor(floors));
     }
 
     @Override
-    public Optional<List<Floor>> getFloorsByLevel(Integer level) {
-        List<Piso> floors =  pisoCrudRepository.getById_Planta(level);
-        return Optional.of(mapper.toFloors(floors));
+    public Optional<Floor> getFloorsByLevel(Integer level) {
+        Piso floors =  pisoCrudRepository.getById_Planta(level);
+        return Optional.of(mapper.toFloor(floors));
     }
 
     @Override
-    public Optional<List<Floor>> getFloorsByDoor(String door) {
-        List<Piso> floors =  pisoCrudRepository.getById_Puerta(door);
-        return Optional.of(mapper.toFloors(floors));
+    public Optional<Floor> getFloorsByDoor(String door) {
+        Piso floors =  pisoCrudRepository.getById_Puerta(door);
+        return Optional.of(mapper.toFloor(floors));
     }
 
     @Override
-    public void deleteFloorByNumber(Integer number) {
-        pisoCrudRepository.deleteById_Numero(number);
-    }
+    public void deleteFloor(Integer number, String street, Character stair, Integer level, String door) {
 
-    @Override
-    public void deleteFloorByStreet(String street) {
-        pisoCrudRepository.deleteById_Calle(street);
-    }
-
-    @Override
-    public void deleteFloorByStair(Character stair) {
-        pisoCrudRepository.deleteById_Escalera(stair);
-    }
-
-    @Override
-    public void deleteFloorByLevel(Integer level) {
-        pisoCrudRepository.deleteById_Planta(level);
-    }
-
-    @Override
-    public void deleteFloorByDoor(String door) {
-        pisoCrudRepository.deleteById_Puerta(door);
+        pisoCrudRepository.delete(pisoCrudRepository.findById_NumeroAndId_CalleAndId_EscaleraAndId_PlantaAndId_Puerta(number, street, stair, level, door));
     }
 
     @Override
@@ -87,12 +68,12 @@ public class PisoRepository implements FloorRepository {
     }
 
     @Override
-    public Floor updateFloor(Floor floor) {
-        Piso piso = mapper.toPiso(floor);
-        if (piso.getId() != null && pisoCrudRepository.existsById(piso.getId())) {
-            return mapper.toFloor(pisoCrudRepository.save(piso));
-        } else {
-            throw new RuntimeException("No se puede actualizar Piso porque no existe en la base de datos.");
+    public void updateFloor(Integer number, String street, Integer meters, String odFloor) {
+        Piso piso = pisoCrudRepository.getById_Numero(number);
+        if (piso!=null) {
+            piso.setOdPiso(odFloor);
+            piso.setMetrosP(meters);
+            pisoCrudRepository.save(piso);
         }
     }
 }

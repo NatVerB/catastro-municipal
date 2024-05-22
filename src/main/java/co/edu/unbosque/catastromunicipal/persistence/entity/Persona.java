@@ -18,12 +18,19 @@ public class Persona {
     private String apellido;
     @Column(name = "od_persona")
     private String odPersona;
-    @Column(name = "dni_c",insertable = false, updatable = false)
+    @Column(name = "dni_c")
     private Integer dniC;
     @Column(name = "calle")
     private String calle;
     @Column(name = "numero")
     private Integer numero;
+
+    @ManyToOne
+    @JoinColumn(name = "dni_c", referencedColumnName = "dni", insertable = false, updatable = false)
+    private Persona persona;
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Persona> personas;
 
     @ManyToOne
     @JoinColumns({
@@ -106,5 +113,21 @@ public class Persona {
 
     public void setCasaParticular(List<CasaParticular> casaParticular) {
         this.casaParticular = casaParticular;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public List<Persona> getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(List<Persona> personas) {
+        this.personas = personas;
     }
 }

@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface FlatResidentRepository {
     List<FlatResident> getAllFlatResidents();
-    Optional<List<FlatResident>> getFlatResidentsByDni(Integer dni);
+    Optional<FlatResident> getFlatResidentsByDni(Integer dni);
     void deleteFlatResidentByDni(Integer dni);
     FlatResident saveFlatResident(FlatResident flatResident);
     FlatResident updateFlatResident(FlatResident flatResident);

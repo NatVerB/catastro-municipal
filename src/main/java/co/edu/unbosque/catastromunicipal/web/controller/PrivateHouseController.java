@@ -30,22 +30,15 @@ public class PrivateHouseController {
         return privateHouseService.getPrivateHousesByStreet(street).map(privatehouses -> new ResponseEntity<>(privatehouses, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/deleteprivatehouse/bynumber")
-    public ResponseEntity<String> deletePrivateHouseByNumber(Integer number){
-        if(privateHouseService.deletePrivateHouseByNumber(number)){
+    @DeleteMapping("/deleteprivatehouse")
+    public ResponseEntity<String> deletePrivateHouse(Integer number, String street){
+        if(privateHouseService.deletePrivateHouse(number, street)){
             return new ResponseEntity<>("Deleted",HttpStatus.OK);
         }else{
             return new ResponseEntity<>("Not Deleted",HttpStatus.NOT_FOUND);
         }
     }
-    @DeleteMapping("/deleteprivatehouse/bystreet")
-    public ResponseEntity<String> deletePrivateHouseByStreet(String street){
-        if(privateHouseService.deletePrivateHouseByStreet(street)){
-            return new ResponseEntity<>("Deleted",HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>("Not Deleted",HttpStatus.NOT_FOUND);
-        }
-    }
+
     @PostMapping("/addprivatehouse")
     public ResponseEntity<PrivateHouse> savePrivateHouse(PrivateHouse privateHouse){
         return new ResponseEntity<>(privateHouseService.savePrivateHouse(privateHouse), HttpStatus.CREATED);
