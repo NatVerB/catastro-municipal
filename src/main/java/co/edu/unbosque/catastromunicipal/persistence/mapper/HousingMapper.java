@@ -31,4 +31,5 @@ public interface HousingMapper {
             @Mapping(target = "zonaUrbana", ignore = true)
     })
     Vivienda toVivienda(Housing housing);
+    List<Vivienda> toViviendaList(List<Housing> housings);
 }

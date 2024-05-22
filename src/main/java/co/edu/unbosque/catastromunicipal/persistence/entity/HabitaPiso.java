@@ -19,7 +19,6 @@ public class HabitaPiso {
     @Column(name = "puerta")
     private String puerta;
 
-    @MapsId
     @ManyToOne
     @JoinColumn(name = "dni", referencedColumnName = "dni", updatable = false, insertable = false)
     private Persona persona;

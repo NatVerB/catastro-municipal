@@ -2,6 +2,7 @@ package co.edu.unbosque.catastromunicipal.web.controller;
 
 import co.edu.unbosque.catastromunicipal.domain.BlockHouses;
 import co.edu.unbosque.catastromunicipal.domain.service.BlockHousesService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/blockhouses")
+@Transactional
 public class BlockHousesController {
     @Autowired
     private BlockHousesService blockHousesService;
@@ -23,12 +25,12 @@ public class BlockHousesController {
 
 
     @GetMapping("/blockhousestreet/{street}")
-    public ResponseEntity<List<BlockHouses>> getBlockHousesByStreet(@PathVariable("street") String street) {
+    public ResponseEntity<BlockHouses> getBlockHousesByStreet(@PathVariable("street") String street) {
         return blockHousesService.getBlockHousesByStreet(street).map(blockHouses -> new ResponseEntity<>(blockHouses, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/blockhousenumber/{number}")
-    public ResponseEntity<List<BlockHouses>>  getBlockHousesByNumber(@PathVariable("number") Integer number) {
+    public ResponseEntity<BlockHouses> getBlockHousesByNumber(@PathVariable("number") Integer number) {
         return blockHousesService.getBlockHousesByNumber(number).map(blockHousesList -> new ResponseEntity<>(blockHousesList, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
@@ -56,9 +58,9 @@ public class BlockHousesController {
     }
 
     @PutMapping("updateblockhouse")
-    public ResponseEntity<String> updateBlockHouses(BlockHouses blockHouses) {
+    public ResponseEntity<String> updateBlockHouses(Integer number, String street, String odHouse) {
 
-        if(blockHousesService.updateBlockHouses(blockHouses)){
+        if(blockHousesService.updateBlockHouses(number,street,odHouse)){
             return new ResponseEntity<>("Updated",HttpStatus.OK);
         }else{
             return new ResponseEntity<>("Not Updated",HttpStatus.NOT_FOUND);

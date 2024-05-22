@@ -40,7 +40,7 @@ public class Vivienda {
     @OneToOne(mappedBy = "vivienda", cascade = CascadeType.ALL, orphanRemoval = true)
     private CasaParticular casaParticular;
 
-    @OneToMany(mappedBy = "vivienda", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "vivienda")
     private List<Persona> personas;
 
 

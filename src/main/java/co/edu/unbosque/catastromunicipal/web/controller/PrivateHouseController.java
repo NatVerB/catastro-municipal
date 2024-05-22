@@ -2,6 +2,7 @@ package co.edu.unbosque.catastromunicipal.web.controller;
 
 import co.edu.unbosque.catastromunicipal.domain.PrivateHouse;
 import co.edu.unbosque.catastromunicipal.domain.service.PrivateHouseService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/privatehouse")
+@Transactional
 public class PrivateHouseController {
     @Autowired
     private PrivateHouseService privateHouseService;
@@ -20,11 +22,11 @@ public class PrivateHouseController {
         return new ResponseEntity<>(privateHouseService.getAllPrivateHouses(), HttpStatus.OK);
     }
     @GetMapping("/privatehouses/bynumber/{id}")
-    public ResponseEntity<List<PrivateHouse>> getPrivateHousesByNumber(@PathVariable("id") Integer number){
+    public ResponseEntity<PrivateHouse> getPrivateHousesByNumber(@PathVariable("id") Integer number){
         return privateHouseService.getPrivateHousesByNumber(number).map(privatehouses -> new ResponseEntity<>(privatehouses, HttpStatus.OK)).orElse((new ResponseEntity<>(HttpStatus.NOT_FOUND)));
     }
     @GetMapping("/privatehouses/bystreet/{id}")
-    public ResponseEntity<List<PrivateHouse>> getPrivateHousesByStreet(@PathVariable("id") String street){
+    public ResponseEntity<PrivateHouse> getPrivateHousesByStreet(@PathVariable("id") String street){
         return privateHouseService.getPrivateHousesByStreet(street).map(privatehouses -> new ResponseEntity<>(privatehouses, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
@@ -49,8 +51,8 @@ public class PrivateHouseController {
         return new ResponseEntity<>(privateHouseService.savePrivateHouse(privateHouse), HttpStatus.CREATED);
     }
     @PutMapping("/updateprivatehouse")
-    public ResponseEntity<String> updatePrivateHouse(PrivateHouse privateHouse){
-        if (privateHouseService.updatePrivateHouse(privateHouse)){
+    public ResponseEntity<String> updatePrivateHouse(Integer number, String street, String odHouse){
+        if (privateHouseService.updatePrivateHouse(number, street, odHouse)){
             return new ResponseEntity<>("Updated",HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Not Updated",HttpStatus.NOT_MODIFIED);

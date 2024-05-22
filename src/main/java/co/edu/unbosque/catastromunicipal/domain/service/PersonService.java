@@ -22,7 +22,7 @@ public class PersonService {
     }
 
     public Optional<Person> getById(Integer id) {
-        return Optional.of(personRepository.getById(id));
+        return personRepository.getById(id);
     }
 
     public boolean deleteById(Integer id) {

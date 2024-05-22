@@ -24,15 +24,15 @@ public class CasaParticularRepository implements PrivateHouseRepository {
     }
 
     @Override
-    public Optional<List<PrivateHouse>> getPrivateHousesByNumber(Integer number) {
-        List<CasaParticular> casaParticular = casaParticularCrudRepository.findById_Numero(number);
-        return Optional.of(mapper.toPrivateHouses(casaParticular));
+    public Optional<PrivateHouse> getPrivateHousesByNumber(Integer number) {
+        CasaParticular casaParticular = casaParticularCrudRepository.findById_Numero(number);
+        return Optional.of(mapper.toPrivateHouse(casaParticular));
     }
 
     @Override
-    public Optional<List<PrivateHouse>> getPrivateHousesByStreet(String street) {
-        List<CasaParticular> casaParticular = casaParticularCrudRepository.findById_Calle(street);
-        return Optional.of(mapper.toPrivateHouses(casaParticular));
+    public Optional<PrivateHouse> getPrivateHousesByStreet(String street) {
+        CasaParticular casaParticular = casaParticularCrudRepository.findById_Calle(street);
+        return Optional.of(mapper.toPrivateHouse(casaParticular));
     }
 
     @Override
@@ -52,10 +52,11 @@ public class CasaParticularRepository implements PrivateHouseRepository {
     }
 
     @Override
-    public PrivateHouse updatePrivateHouse(PrivateHouse privateHouse) {
-        CasaParticular casaParticular= mapper.toCasaParticular(privateHouse);
-        if (casaParticular.getId() != null && casaParticularCrudRepository.getById_Numero(privateHouse.getNumber())!=null) {
-            return mapper.toPrivateHouse(casaParticularCrudRepository.save(casaParticular));
+    public void updatePrivateHouse(Integer number, String street, String odHouse) {
+        CasaParticular casaParticular= casaParticularCrudRepository.findById_Numero(number);
+        if (casaParticular!=null) {
+            casaParticular.setOdCasa(odHouse);
+            casaParticularCrudRepository.save(casaParticular);
         } else {
             throw new RuntimeException("No se puede actualizar CasaParticular porque no existe en la base de datos.");
         }

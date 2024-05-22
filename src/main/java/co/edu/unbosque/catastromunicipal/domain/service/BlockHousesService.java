@@ -18,11 +18,11 @@ public class BlockHousesService {
         return blockHousesRepository.getAllBlockHouses();
     }
 
-    public Optional<List<BlockHouses>> getBlockHousesByStreet(String name) {
+    public Optional<BlockHouses> getBlockHousesByStreet(String name) {
         return blockHousesRepository.getBlockHousesByStreet(name);
     }
 
-    public Optional<List<BlockHouses>> getBlockHousesByNumber(Integer number) {
+    public Optional<BlockHouses> getBlockHousesByNumber(Integer number) {
         return blockHousesRepository.getBlockHousesByNumber(number);
     }
     public boolean deleteBlockHousesByNumber(Integer number){
@@ -35,7 +35,7 @@ public class BlockHousesService {
     }
 
     public boolean deleteBlockHousesByStreet(String street){
-        if(getBlockHousesByStreet(street).isPresent()){
+        if(blockHousesRepository.getBlockHousesByStreet(street).isPresent()){
             blockHousesRepository.deleteBlockHousesByStreet(street);
             return true;
         }else{
@@ -47,13 +47,12 @@ public class BlockHousesService {
         return blockHousesRepository.saveBlockHouses(blockHouses);
     }
 
-    public boolean updateBlockHouses(BlockHouses blockHouses){
-        if(getBlockHousesByNumber(blockHouses.getNumber()).isPresent()&&getBlockHousesByStreet(blockHouses.getStreet()).isPresent()){
-            blockHousesRepository.updateBlockHouses(blockHouses);
+    public boolean updateBlockHouses(Integer number, String street, String odHouse){
+        if(getBlockHousesByNumber(number).isPresent()){
+            blockHousesRepository.updateBlockHouses(number, street, odHouse);
             return true;
         }else{
             return false;
         }
     }
-
 }

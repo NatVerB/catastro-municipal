@@ -45,7 +45,7 @@ public class HabitaPisoRepository implements FlatResidentRepository {
     @Override
     public FlatResident updateFlatResident(FlatResident flatResident) {
         HabitaPiso habitaPiso = mapper.toHabitaPiso(flatResident);
-        if (habitaPiso.getDni() != null && habitaPisoCrudRepository.existsById(habitaPiso.getDni())) {
+        if (habitaPiso.getDni() != null && habitaPisoCrudRepository.findByDni(habitaPiso.getDni())!=null) {
             return mapper.toFlatResident(habitaPisoCrudRepository.save(habitaPiso));
         } else {
             throw new RuntimeException("No se puede actualizar HabitaPiso porque no existe en la base de datos.");

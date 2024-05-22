@@ -8,9 +8,7 @@ import java.util.Objects;
 
 @Embeddable
 public class BloqueCasasPK implements Serializable {
-    @Column(name = "numero")
     private Integer numero;
-    @Column(name = "calle")
     private String calle;
 
     public BloqueCasasPK(){

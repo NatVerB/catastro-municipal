@@ -2,6 +2,7 @@ package co.edu.unbosque.catastromunicipal.web.controller;
 
 import co.edu.unbosque.catastromunicipal.domain.Person;
 import co.edu.unbosque.catastromunicipal.domain.service.PersonService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,17 +12,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/person")
+@Transactional
 public class PersonController {
     @Autowired
     private PersonService personService;
 
     @PostMapping("/addperson")
     public ResponseEntity<Person> save(Person person){
-        if(getById(person.getId())==null){
             return new ResponseEntity<>(personService.save(person), HttpStatus.CREATED);
-        }else{
-            return new ResponseEntity<>(null , HttpStatus.BAD_REQUEST) ;
-        }
+
     }
     @GetMapping("/allpeople")
     public ResponseEntity<List<Person>> getAllPersons(){

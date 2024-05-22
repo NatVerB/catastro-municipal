@@ -27,11 +27,10 @@ public class BloqueCasas {
     private Vivienda vivienda;
 
     @OneToMany(mappedBy = "bloqueCasas", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Piso> pisos;
+    private List<Piso> piso;
 
 
     // getters y setters
-
 
     public ViviendaPK getId() {
         return id;
@@ -65,11 +64,11 @@ public class BloqueCasas {
         this.vivienda = vivienda;
     }
 
-    public List<Piso> getPisos() {
-        return pisos;
+    public List<Piso> getPiso() {
+        return piso;
     }
 
-    public void setPisos(List<Piso> pisos) {
-        this.pisos = pisos;
+    public void setPiso(List<Piso> piso) {
+        this.piso = piso;
     }
 }

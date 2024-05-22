@@ -22,7 +22,7 @@ public interface BlockHousesMapper {
 
     @InheritInverseConfiguration
     @Mappings({
-            @Mapping(target="pisos", ignore = true),
+            @Mapping(target="piso", ignore = true),
             @Mapping(target="vivienda", ignore = true)
     })
     BloqueCasas toBloqueCasas(BlockHouses blockHouses);

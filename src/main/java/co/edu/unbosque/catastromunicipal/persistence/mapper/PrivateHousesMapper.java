@@ -27,4 +27,5 @@ public interface PrivateHousesMapper {
             @Mapping(target = "vivienda", ignore = true)
     })
     CasaParticular toCasaParticular(PrivateHouse privateHouse);
+    List<CasaParticular> toCasaParticulars(List<PrivateHouse> privateHouses);
 }

@@ -9,9 +9,7 @@ import java.util.Objects;
 @Embeddable
 public class ViviendaPK implements Serializable {
 
-    @Column(name = "numero")
     private Integer numero;
-    @Column(name = "calle")
     private String calle;
 
     public ViviendaPK() {

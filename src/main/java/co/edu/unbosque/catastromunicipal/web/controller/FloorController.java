@@ -2,6 +2,7 @@ package co.edu.unbosque.catastromunicipal.web.controller;
 
 import co.edu.unbosque.catastromunicipal.domain.Floor;
 import co.edu.unbosque.catastromunicipal.domain.service.FloorService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/floor")
+@Transactional
 public class FloorController {
     @Autowired
     private FloorService floorService;

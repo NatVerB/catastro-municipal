@@ -6,15 +6,10 @@ import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 @Embeddable
 public class PisoPK implements Serializable {
-    @Column(name = "numero")
     private Integer numero;
-    @Column(name = "calle")
     private String calle;
-    @Column(name = "escalera")
     private Character escalera;
-    @Column(name = "planta")
     private Integer planta;
-    @Column(name = "puerta")
     private String puerta;
 
     public Integer getNumero() {

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class PersonaRepository implements PersonRepository {
@@ -31,9 +32,9 @@ public class PersonaRepository implements PersonRepository {
     }
 
     @Override
-    public Person getById(Integer id) {
+    public Optional<Person> getById(Integer id) {
         Persona personas = personaCrudRepository.findPersonaById(id);
-        return mapper.toPerson(personas);
+        return Optional.of(mapper.toPerson(personas));
     }
 
     @Override

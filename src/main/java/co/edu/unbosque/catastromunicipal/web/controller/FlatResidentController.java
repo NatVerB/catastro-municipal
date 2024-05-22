@@ -2,6 +2,7 @@ package co.edu.unbosque.catastromunicipal.web.controller;
 
 import co.edu.unbosque.catastromunicipal.domain.FlatResident;
 import co.edu.unbosque.catastromunicipal.domain.service.FlatResidentService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/flatresident")
+@Transactional
 public class FlatResidentController {
     @Autowired
     private FlatResidentService flatResidentService;

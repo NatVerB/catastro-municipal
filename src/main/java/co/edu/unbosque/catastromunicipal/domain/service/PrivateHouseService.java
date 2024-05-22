@@ -17,10 +17,10 @@ public class PrivateHouseService {
     public List<PrivateHouse> getAllPrivateHouses(){
         return privateHouseRepository.getAllPrivateHouses();
     }
-    public Optional<List<PrivateHouse>> getPrivateHousesByNumber(Integer number){
+    public Optional<PrivateHouse> getPrivateHousesByNumber(Integer number){
         return privateHouseRepository.getPrivateHousesByNumber(number);
     }
-    public Optional<List<PrivateHouse>> getPrivateHousesByStreet(String street){
+    public Optional<PrivateHouse> getPrivateHousesByStreet(String street){
         return privateHouseRepository.getPrivateHousesByStreet(street);
     }
     public boolean deletePrivateHouseByNumber(Integer number){
@@ -42,9 +42,9 @@ public class PrivateHouseService {
     public PrivateHouse savePrivateHouse(PrivateHouse privateHouse){
         return privateHouseRepository.savePrivateHouse(privateHouse);
     }
-    public boolean updatePrivateHouse(PrivateHouse privateHouse){
-        if(getPrivateHousesByNumber(privateHouse.getNumber()).isPresent() && getPrivateHousesByStreet(privateHouse.getStreet()).isPresent()){
-            privateHouseRepository.updatePrivateHouse(privateHouse);
+    public boolean updatePrivateHouse(Integer number, String street, String odHouse){
+        if(getPrivateHousesByNumber(number).isPresent()){
+            privateHouseRepository.updatePrivateHouse(number, street, odHouse);
             return true;
         }else{
             return false;

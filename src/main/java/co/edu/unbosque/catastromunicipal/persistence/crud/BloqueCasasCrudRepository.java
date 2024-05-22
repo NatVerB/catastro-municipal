@@ -6,9 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface BloqueCasasCrudRepository extends CrudRepository<BloqueCasas, BloqueCasasPK> {
-    List<BloqueCasas> findById_Numero(Integer numero);
-    List<BloqueCasas> findById_Calle(String calle);
+    BloqueCasas findById_Numero(Integer numero);
+    BloqueCasas findById_Calle(String calle);
     void deleteById_Calle(String calle);
     void deleteById_Numero(Integer calle);
-
 }

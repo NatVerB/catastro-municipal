@@ -7,10 +7,10 @@ import java.util.Optional;
 
 public interface PrivateHouseRepository {
     List<PrivateHouse> getAllPrivateHouses();
-    Optional<List<PrivateHouse>> getPrivateHousesByNumber(Integer number);
-    Optional<List<PrivateHouse>> getPrivateHousesByStreet(String street);
+    Optional<PrivateHouse> getPrivateHousesByNumber(Integer number);
+    Optional<PrivateHouse> getPrivateHousesByStreet(String street);
     void deletePrivateHouseByNumber(Integer number);
     void deletePrivateHouseByStreet(String street);
     PrivateHouse savePrivateHouse(PrivateHouse privateHouse);
-    PrivateHouse updatePrivateHouse(PrivateHouse privateHouse);
+    void updatePrivateHouse(Integer number, String street, String odHouse);
 }

@@ -5,6 +5,7 @@ import co.edu.unbosque.catastromunicipal.domain.repository.BlockHousesRepository
 import co.edu.unbosque.catastromunicipal.persistence.crud.BloqueCasasCrudRepository;
 import co.edu.unbosque.catastromunicipal.persistence.entity.BloqueCasas;
 import co.edu.unbosque.catastromunicipal.persistence.mapper.BlockHousesMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,25 +26,25 @@ public class BloqueCasasRepository implements BlockHousesRepository {
     }
 
     @Override
-    public Optional<List<BlockHouses>> getBlockHousesByStreet(String calle){
-        List<BloqueCasas> bloqueCasas =  bloqueCasasCrudRepository.findById_Calle(calle);
+    public Optional<BlockHouses> getBlockHousesByStreet(String calle){
+        BloqueCasas bloqueCasas =  bloqueCasasCrudRepository.findById_Calle(calle);
         return Optional.of(mapper.toBlockHouses(bloqueCasas));
     }
 
     @Override
-    public Optional<List<BlockHouses>> getBlockHousesByNumber(Integer numero){
-        List<BloqueCasas> bloqueCasas =  (List<BloqueCasas>) bloqueCasasCrudRepository.findById_Numero(numero);
+    public Optional<BlockHouses> getBlockHousesByNumber(Integer numero){
+        BloqueCasas bloqueCasas = bloqueCasasCrudRepository.findById_Numero(numero);
         return Optional.of(mapper.toBlockHouses(bloqueCasas));
     }
 
     @Override
     public void deleteBlockHousesByNumber(Integer number){
-        bloqueCasasCrudRepository.deleteById_Numero(number);
+        bloqueCasasCrudRepository.delete(bloqueCasasCrudRepository.findById_Numero(number));
     }
 
     @Override
     public void deleteBlockHousesByStreet(String street){
-        bloqueCasasCrudRepository.deleteById_Calle(street);
+        bloqueCasasCrudRepository.delete(bloqueCasasCrudRepository.findById_Calle(street));
     }
 
     @Override
@@ -53,12 +54,11 @@ public class BloqueCasasRepository implements BlockHousesRepository {
     }
 
     @Override
-    public BlockHouses updateBlockHouses(BlockHouses blockHouses){
-        BloqueCasas bloqueCasas = mapper.toBloqueCasas(blockHouses);
-        if (bloqueCasas.getId() != null && bloqueCasasCrudRepository.findById_Numero(blockHouses.getNumber())!=null) {
-            return mapper.toBlockHouses(bloqueCasasCrudRepository.save(bloqueCasas));
-        } else {
-            throw new RuntimeException("No se puede actualizar el BloqueCasas porque no existe en la base de datos.");
+    public void updateBlockHouses(Integer number, String street, String odHouse){
+        BloqueCasas bloqueCasas = bloqueCasasCrudRepository.findById_Numero(number);
+        if (bloqueCasas != null ) {
+            bloqueCasas.setOdBloque(odHouse);
+            bloqueCasasCrudRepository.save(bloqueCasas);
         }
     }
 }

@@ -30,4 +30,5 @@ public interface FloorMapper {
             @Mapping(target = "habitaPiso", ignore = true)
     })
     Piso toPiso(Floor floor);
+    List<Piso> toPisos(List<Floor> floors);
 }
