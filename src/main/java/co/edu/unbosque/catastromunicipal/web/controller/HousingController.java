@@ -48,8 +48,8 @@ public class HousingController {
     }
 
     @PutMapping("/updatehousing")
-    public ResponseEntity<String> updateHousing(Housing housing) {
-        if (housingService.updateHousing(housing)) {
+    public ResponseEntity<String> updateHousing(Integer number, String calle, Integer cod, String od) {
+        if (housingService.updateHousing(number, calle, cod, od)) {
             return new ResponseEntity<>("Updated", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Not Updated", HttpStatus.NOT_MODIFIED);

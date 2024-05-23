@@ -36,9 +36,9 @@ public class HousingService {
     public Housing saveHousing(Housing housing){
         return housingRepository.saveHousing(housing);
     }
-    public boolean updateHousing(Housing housing){
-        if(getHousingByStreet(housing.getStreet()).isPresent()&&getHousingByNumber(housing.getNumber()).isPresent()){
-            housingRepository.updateHousing(housing);
+    public boolean updateHousing(Integer number, String calle, Integer cod, String od){
+        if(getHousingByStreet(calle).isPresent()&&getHousingByNumber(number).isPresent()){
+            housingRepository.updateHousing(number, calle, cod, od);
             return true;
         }else{
             return false;

@@ -53,10 +53,12 @@ public class ViviendaRepository implements HousingRepository {
     }
 
     @Override
-    public Housing updateHousing(Housing housing) {
-        Vivienda vivienda = mapper.toVivienda(housing);
-        if (vivienda.getId() != null && viviendaCrudRepository.existsById(vivienda.getId())) {
-            return mapper.toHousing(viviendaCrudRepository.save(vivienda));
+    public void  updateHousing(Integer number, String calle, Integer cod, String od) {
+        Vivienda vivienda = viviendaCrudRepository.findById_NumeroAndId_Calle(number, calle);
+        if (vivienda.getId() != null) {
+            vivienda.setOdVivienda(od);
+            vivienda.setCodigoPostal(cod);
+            viviendaCrudRepository.save(vivienda);
         } else {
             throw new RuntimeException("No se puede actualizar el BloqueCasas porque no existe en la base de datos.");
         }
